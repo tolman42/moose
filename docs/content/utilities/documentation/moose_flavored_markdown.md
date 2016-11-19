@@ -118,7 +118,9 @@ the following limits the included code to the `computeQpResidual` method.
 !clang framework/src/kernels/Diffusion.C method=computeQpResidual
 ```
 
+<!--
 !clang framework/src/kernels/Diffusion.C method=computeQpResidual
+-->
 
 !!! warning "Warning"
     This method uses the clang parser directly, which can be slow. Thus, in general source code should be
@@ -160,8 +162,8 @@ the syntax for the system or object being documented.
 * `!inputfiles /Kernels/Diffusion`: Creates a list of input files that use the object or action.
 * `!childobjects /Kernels/Diffusion`: Create a list of objects that inherit from the supplied object.
 * `!devel /Kernels/Diffusion`: Creates links to the repository source code and Doxygen page for the object.
-* `!subobjects framework /Kernels`: Creates a table of objects within the supplied system, the second argument corresponds to the name of the "location" as specified in the configuration yaml file.
-* `!subsystems framework /Adaptivity`: Creates a table of sub-systems within the supplied system, , the second argument corresponds to the name of the "location" as specified in the configuration yaml file.
+* `!subobjects /Kernels`: Creates a table of objects within the supplied system.
+* `!subsystems /Adaptivity`: Creates a table of sub-systems within the supplied system.
 
 ---
 
@@ -328,7 +330,7 @@ It is possible to include citations using latex commands, the following commands
 The bibliography style may be set within a page using the latex command
 `\bibliographystyle{unsrt}`. Three styles are currently available: 'unsrt', 'plain', 'alpha', and 'unsrtalpha'.
 
-The references are displayed by using the latex `\bibliography{docs/moose.bib}` command. This command accepts a comma separated list of bibtex files (*.bib) to use to build citations and references. The files specified in this list must be given as a relative path to the root directory (e.g., `~/projects/moose`) of the repository.
+The references are displayed by using the latex `\bibliography{docs/bib/moose.bib}` command. This command accepts a comma separated list of bibtex files (*.bib) to use to build citations and references. The files specified in this list must be given as a relative path to the root directory (e.g., `~/projects/moose`) of the repository.
 
 \bibliographystyle{unsrt}
-\bibliography{bib/moose.bib}
+\bibliography{docs/bib/moose.bib}

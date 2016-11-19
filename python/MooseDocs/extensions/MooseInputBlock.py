@@ -23,7 +23,7 @@ class MooseInputBlock(MooseTextPatternBase):
 
     # Build the complete filename.
     rel_filename = match.group(2)
-    filename = os.path.join(self._root, rel_filename)
+    filename = MooseDocs.abspath(rel_filename)
 
     # Read the file and create element
     if not os.path.exists(filename):

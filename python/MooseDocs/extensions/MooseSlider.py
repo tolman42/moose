@@ -1,9 +1,13 @@
-from markdown.blockprocessors import BlockProcessor
-from MooseCommonExtension import MooseCommonExtension
 import glob
 import re
 import os
+
+from markdown.blockprocessors import BlockProcessor
 from markdown.util import etree
+
+import MooseDocs
+from MooseCommonExtension import MooseCommonExtension
+
 
 class MooseSlider(BlockProcessor, MooseCommonExtension):
   """
@@ -64,7 +68,7 @@ class MooseSlider(BlockProcessor, MooseCommonExtension):
         caption = ""
         fname = sline
 
-      new_files = glob.glob(os.path.join(self._docs_dir, fname))
+      new_files = glob.glob(MooseDocs.abspath(fname))
       if not new_files:
         # If one of the paths is broken then
         # we return an empty list to indicate

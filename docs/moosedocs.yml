@@ -5,11 +5,6 @@ template_arguments:
     logo: ../media/moose_logo_small.png
     repo_url: https://github.com/idaholab/moose/
 
-extra_pages:
-    - MOOSE:
-        filename: docs/content/index.html
-        template: materialize-home.html
-
 markdown_extensions:
     - toc
     - smarty
@@ -23,42 +18,6 @@ markdown_extensions:
           package: True
           executable: modules/combined/modules-opt
           repo: https://github.com/idaholab/moose/blob/master
-          hide:
-              - /Bounds # this should not be removed, this is deprecated syntax that we do not want to document
-              - /Adaptivity/Indicators
-              - /AuxKernels
-              - /AuxScalarKernels
-              - /AuxVariables
-              - /BCs
-              - /Constraints
-              - /Controls
-              - /DGKernels
-              - /Dampers
-              - /Debug
-              - /DeprecatedBlock
-              - /DiracKernels
-              - /Executioner
-              - /Functions
-              - /GlobalParams
-              - /ICs
-              - /InterfaceKernels
-              - /Kernels
-              - /Materials
-              - /Mesh
-              - /MeshModifiers
-              - /Modules
-              - /MultiApps
-              - /NodalKernels
-              - /NodalNormals
-              - /Outputs
-              - /Postprocessors
-              - /Preconditioning
-              - /Problem
-              - /ScalarKernels
-              - /Transfers
-              - /Variables
-              - /VectorPostprocessors
-              - /UserObjects
           links:
               Tests:
                   - test
@@ -80,19 +39,58 @@ markdown_extensions:
                   paths:
                       - framework/src
                       - framework/include
-                  install: docs/content/framework/systems
+                  install: docs/content/documentation/systems
+                  hide:
+                      - /Bounds # deprecated syntax that we do not want to document
+#                     - /Adaptivity/Indicators
+                      - /AuxKernels
+                      - /AuxScalarKernels
+                      - /AuxVariables
+                      - /BCs
+                      - /Constraints
+                      - /Controls
+                      - /DGKernels
+                      - /Dampers
+                      - /Debug
+                      - /DeprecatedBlock
+                      - /DiracKernels
+                      - /Executioner
+                      - /Functions
+                      - /GlobalParams
+                      - /ICs
+                      - /InterfaceKernels
+                      - /Kernels
+                      - /Materials
+                      - /Mesh
+                      - /MeshModifiers
+                      - /Modules
+                      - /MultiApps
+                      - /NodalKernels
+                      - /NodalNormals
+                      - /Outputs
+                      - /Postprocessors
+                      - /Preconditioning
+                      - /Problem
+                      - /ScalarKernels
+                      - /Transfers
+                      - /Variables
+                      - /VectorPostprocessors
+                      - /UserObjects
+
               phase_field:
                   doxygen: http://mooseframework.org/docs/doxygen/modules/
                   paths:
                       - modules/phase_field/src
                       - modules/phase_field/include
-                  install: docs/content/modules/phase_field/systems
+                  install: docs/content/documentation/systems
+                  hide:
+                      - /Bounds
               tensor_mechanics:
                   doxygen: http://mooseframework.org/docs/doxygen/modules/
                   paths:
                       - modules/tensor_mechanics/src
                       - modules/tensor_mechanics/include
-                  install: docs/content/modules/tensor_mechanics/systems
+                  install: docs/content/documentation/systems
               heat_conduction:
                   hide:
                       - /ThermalContact

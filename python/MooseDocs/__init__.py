@@ -111,10 +111,12 @@ class Loader(yaml.Loader):
     Allow for the embedding of yaml files.
     http://stackoverflow.com/questions/528281/how-can-i-include-an-yaml-file-inside-another
     """
-    filename = self.construct_scalar(node)
+    filename = abspath(self.construct_scalar(node))
     if os.path.exists(filename):
       with open(filename, 'r') as f:
         return yaml.load(f, Loader)
+    else:
+      raise IOError("Unknown included file: {}".format(filename))
 
 
 def yaml_load(filename, loader=Loader):
@@ -122,18 +124,51 @@ def yaml_load(filename, loader=Loader):
   Load a YAML file capable of including other YAML files.
 
   Args:
-    filename[str]: The name fo the file to load.b
+    filename[str]: The name to the file to load, relative to the git root directory
     loader[yaml.Loader]: The loader to utilize.
   """
 
-  ## Attach the include constructor to our custom loader.
+  # Attach the include constructor to our custom loader.
   Loader.add_constructor('!include', Loader.include)
+
+  if not os.path.exists(filename):
+    raise IOError("The supplied configuration file was not found: {}".format(filename))
 
   with open(filename, 'r') as fid:
     yml = yaml.load(fid.read(), Loader)
 
   return yml
 
+def load_config(config_file, **kwargs):
+  """
+  Read the MooseDocs configure file (e.g., moosedocs.yml)
+  """
+  config = yaml_load(config_file)
+  config.update(kwargs)
+
+  # Set the default arguments
+  config.setdefault('site_dir', abspath('site'))
+  config.setdefault('navigation', abspath(os.path.join(os.getcwd(), 'navigation.yml')))
+  config.setdefault('template', 'materialize.html')
+  config.setdefault('template_arguments', dict())
+  config.setdefault('markdown_extensions', [])
+  return config
+
+def get_markdown_extensions(config):
+  """
+  Extract the markdown extensions and associated configurations from the yaml configuration.
+  """
+  extensions = []
+  extension_configs = dict()
+  for extension in config['markdown_extensions']:
+    if isinstance(extension, dict):
+      for k, v in extension.iteritems(): # there should only be one entry, but just in case
+        extensions.append(k)
+        extension_configs[k] = v
+    else:
+      extensions.append(extension)
+
+  return extensions, extension_configs
 
 def purge(extensions):
   """
@@ -199,7 +234,7 @@ def moosedocs():
   if cmd == 'test':
     commands.test(**options)
   elif cmd == 'check':
-    commands.generate(stubs=False, pages_stubs=False, **options)
+    commands.generate(stubs=False, **options)
   elif cmd == 'generate':
     commands.generate(**options)
   elif cmd == 'serve':

@@ -19,7 +19,7 @@ class MooseSystemSyntax(MooseSyntaxBase):
     title[str]: Set the title of the section defined above the table.
   """
 
-  RE = r'^!(subobjects|subsystems)\s+(.*?)\s+(.*?)(?:$|\s+)(.*)'
+  RE = r'^!(subobjects|subsystems)\s+(.*?)(?:$|\s+)(.*)'
 
   def __init__(self, yaml=None, syntax=None, **kwargs):
     MooseSyntaxBase.__init__(self, self.RE, yaml=yaml, syntax=syntax, **kwargs)
@@ -32,85 +32,47 @@ class MooseSystemSyntax(MooseSyntaxBase):
 
     # Extract match options and settings
     action = match.group(2)
-    group = match.group(3)
-    syntax = match.group(4)
-    settings, styles = self.getSettings(match.group(5))
-
-    # Error if supplied group is invalid
-    if group not in self._syntax:
-      return self.createErrorElement(message="The group name '{}' was not found.".format(group))
+    syntax = match.group(3)
+    settings, styles = self.getSettings(match.group(4))
 
     if action == 'subobjects':
-      el = self.subobjectsElement(group, syntax, styles, settings)
+      el = self.subobjectsElement(syntax, styles, settings)
     elif action == 'subsystems':
-      el = self.subsystemsElement(group, syntax, styles, settings)
+      el = self.subsystemsElement(syntax, styles, settings)
     return el
 
-  def subobjectsElement(self, group, syntax, styles, settings):
+  def subobjectsElement(self, obj_name, styles, settings):
     """
     Create table of sub-objects.
     """
 
-    node = self._yaml.find(os.path.join(syntax, '*'))
+    node = self._yaml.find(os.path.join(obj_name, '*'))
     if node:
-      node = self._yaml.find(syntax)
+      node = self._yaml.find(obj_name)
     elif not node:
-      node = self._yaml.find(os.path.join(syntax, '<type>'))
+      node = self._yaml.find(os.path.join(obj_name, '<type>'))
 
     if not node:
-      return self.createErrorElement("The are not any sub-objects for the supplied syntax: {}".format(syntax))
-
-    table = MooseDocs.MarkdownTable('Name', 'Description')
-    for child in node['subblocks']:
-      name = child['name']
-      if name.endswith('*'):
-        continue
-
-      name = name.split('/')[-1].strip()
-      if self._syntax[group].hasObject(name):
-        a = etree.Element('a')
-        a.set('href', '../{}/index.html'.format(name.lower()))
-        a.text = name
-        table.addRow(a, child['description'])
-
-    if table.size() == 0:
-      return self.createErrorElement("No sub-objects exists for the supplied syntax: {}".format(syntax))
+      return self.createErrorElement("The are not any sub-objects for the supplied syntax: {}".format(obj_name))
 
     el = etree.Element('div', styles)
     h2 = etree.SubElement(el, 'h2')
     h2.text = settings['title'] if settings['title'] else 'Available Sub-Objects'
-    t = table.html()
-    t.set('class', 'moose-subobjects-table')
-    el.append(t)
+    el.append(MooseDocs.extensions.create_object_collection(node, self._syntax))
     return el
 
-  def subsystemsElement(self, group, syntax, styles, settings):
+  def subsystemsElement(self, sys_name, styles, settings):
     """
     Create table of sub-systems.
     """
 
-    node = self._yaml.find(syntax)
+    node = self._yaml.find(sys_name)
     if not node:
-      return createErrorElement("The are not any sub-systems for the supplied syntax: {} You likely need to remove the '!subobjects' syntax.".format(syntax))
-
-    table = MooseDocs.MarkdownTable('Name', 'Description')
-    if node['subblocks']:
-      for child in node['subblocks']:
-        name = child['name']
-        if self._syntax[group].hasSystem(name):
-          name = name.split('/')[-1].strip()
-          a = etree.Element('a')
-          a.set('href', '../{}/Overview'.format(name.lower()))
-          a.text = name
-          table.addRow(a, child['description'])
-
-    if table.size() == 0:
-      return self.createErrorElement("No sub-systems exists for the supplied syntax: {}. You likely need to remove the '!subsystems' markdown.".format(syntax))
+      return createErrorElement("The are not any sub-systems for the supplied syntax: {} You likely need to remove the '!subobjects' syntax.".format(sys_name))
 
     el = etree.Element('div', styles)
     h2 = etree.SubElement(el, 'h2')
     h2.text = settings['title'] if settings['title'] else 'Available Sub-Systems'
-    t = table.html()
-    t.set('class', 'moose-subsystems-table')
-    el.append(t)
+    el.append(MooseDocs.extensions.create_system_collection(node, self._syntax))
+
     return el

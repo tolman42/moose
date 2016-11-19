@@ -20,6 +20,7 @@ from MooseCSS import MooseCSS
 from MooseSlidePreprocessor import MooseSlidePreprocessor
 from MooseBuildStatus import MooseBuildStatus
 from MooseBibtex import MooseBibtex
+from MooseSystemList import MooseSystemList
 import MooseDocs
 import utils
 
@@ -92,10 +93,6 @@ class MooseMarkdown(markdown.Extension):
     # Populate the syntax
     self.syntax = dict()
     for key, value in config['locations'].iteritems():
-      if 'hide' in value:
-        value['hide'] += config['hide']
-      else:
-        value['hide'] = config['hide']
       self.syntax[key] = MooseDocs.MooseApplicationSyntax(exe_yaml, **value)
 
     # Preprocessors
@@ -109,18 +106,14 @@ class MooseMarkdown(markdown.Extension):
     md.parser.blockprocessors.add('css', MooseCSS(md.parser, **config), '_begin')
 
     # Inline Patterns
-    object_markdown = MooseObjectSyntax(markdown_instance=md,
-                                        yaml=exe_yaml,
-                                        syntax=self.syntax,
-                                        database=database,
-                                        **config)
+    object_markdown = MooseObjectSyntax(markdown_instance=md, yaml=exe_yaml, syntax=self.syntax, database=database, **config)
     md.inlinePatterns.add('moose_object_syntax', object_markdown, '_begin')
 
-    system_markdown = MooseSystemSyntax(markdown_instance=md,
-                                        yaml=exe_yaml,
-                                        syntax=self.syntax,
-                                        **config)
+    system_markdown = MooseSystemSyntax(markdown_instance=md, yaml=exe_yaml, syntax=self.syntax, **config)
     md.inlinePatterns.add('moose_system_syntax', system_markdown, '_begin')
+
+    system_list = MooseSystemList(markdown_instance=md, yaml=exe_yaml, syntax=self.syntax, **config)
+    md.inlinePatterns.add('moose_system_list', system_list, '_begin')
 
     md.inlinePatterns.add('moose_input_block', MooseInputBlock(markdown_instance=md, **config), '<image_link')
     md.inlinePatterns.add('moose_cpp_method', MooseCppMethod(markdown_instance=md, **config), '<image_link')

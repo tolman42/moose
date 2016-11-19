@@ -5,11 +5,12 @@
 </head>
 
 <body>
+  <div class="page-wrap">
   <header>
     {% include 'header.html' %}
   </header>
 
-  <main>
+  <main class="main">
     <div class="container">
 
       <!-- Breadcrumbs spanning entire page -->
@@ -23,18 +24,29 @@
       <div class="row">
 
         <!-- Markdown -->
-        <div id="moose-markdown-content" class="col s12 m8 l9">
-          {{current.html()}}
-        </div>
+        {% if show_table_of_contents|default(True) %}
+          <div id="moose-markdown-content" class="col s12 m8 l9">
+            {{current.html()}}
+          </div>
 
-        <!-- TOC -->
-        <div class="col hid-on-small-only m4 l3">
-          {% include 'table_of_contents.html' %}
-        </div>
+          <!-- TOC -->
+          <div class="col hid-on-small-only m4 l3">
+            {% include 'table_of_contents.html' %}
+          </div>
+
+        {% else %}
+
+          <div id="moose-markdown-content" class="col s12 m12 l12">
+            {{current.html()}}
+          </div>
+        {% endif %}
+
+
       </div>
 
     </div>
   </main>
+  </div>
 
   <footer class="page-footer">
     <div class="container white-text">
