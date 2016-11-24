@@ -28,7 +28,7 @@ if not os.path.exists(MOOSE_DIR):
 
 ROOT_DIR = subprocess.check_output(['git', 'rev-parse', '--show-toplevel'], stderr=subprocess.STDOUT).strip('\n')
 
-class MkMooseDocsFormatter(logging.Formatter):
+class MooseDocsFormatter(logging.Formatter):
   """
   A formatter that is aware of the class hierarchy of the MooseDocs library.
 
@@ -84,7 +84,7 @@ def init_logging(verbose=False):
     level = logging.INFO
 
   # Custom format that colors and counts errors/warnings
-  formatter = MkMooseDocsFormatter()
+  formatter = MooseDocsFormatter()
   handler = logging.StreamHandler()
   handler.setFormatter(formatter)
 

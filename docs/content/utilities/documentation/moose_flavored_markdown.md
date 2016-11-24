@@ -63,9 +63,9 @@ Moose Flavored Markdown is capable of automatically creating links based on Mark
 especially useful when linking to generated pages. The syntax is identical to creating links as
 defined by [mkdocs], however the markdown path may be incomplete.
 
-* `[/Kernels/Diffusion.md]`: [/Kernels/Diffusion.md]
-* `[framework/systems/Kernels/Overview.md]`: [framework/systems/Kernels/Overview.md]
-* `[Diffusion](/Kernels/Diffusion)`: [Diffusion](/Kernels/Diffusion.md)
+* `[/Kernels/Diffusion.md]`: [/Kernels/framework/Diffusion.md]
+* `[framework/systems/Kernels/Overview.md]`: [framework/systems/Kernels/framework/Overview.md]
+* `[Diffusion](/Kernels/Diffusion)`: [Diffusion](/Kernels/framework/Diffusion.md)
 
 ---
 

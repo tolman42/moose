@@ -25,7 +25,7 @@ def build_options(parser, subparser):
   return build_parser
 
 
-def make_tree(directory, node, *args):
+def make_tree(directory, node, **kwargs):
   """
   Create the tree structure of NavigationNode/MoosePage objects
   """
@@ -36,21 +36,22 @@ def make_tree(directory, node, *args):
       continue
 
     if os.path.isfile(path) and (path.endswith('.md') or path.endswith('.html')):
-      child = MoosePage(path, node, *args)
+      child = MoosePage(path, node, **kwargs)
       node.children.append(child)
 
     elif os.path.isdir(path) and (p not in ['.', '..']):
       md = os.path.join(path, 'index.md')
       html = os.path.join(path, 'index.html')
       if os.path.exists(md):
-        child = MoosePage(md, node, *args)
+        child = MoosePage(md, node, **kwargs)
       elif os.path.exists(html):
-        child = MoosePage(html, node, *args)
+        child = MoosePage(html, node, **kwargs)
       else:
-        child = NavigationNode(path, node, *args)
+        child = NavigationNode(path, node, **kwargs)
 
-      make_tree(path, child, *args)
+      make_tree(path, child, **kwargs)
       node.children.append(child)
+
 
 def flat(node):
   """
@@ -65,19 +66,14 @@ def flat(node):
     for c in flat(child):
       yield c
 
+
 class Builder(object):
   """
   Object for building
   """
   def __init__(self, parser, site_dir, template, template_args, navigation):
 
-    self._parser = parser
     self._site_dir = site_dir
-
-    self._template = template
-    self._template_args = template_args
-
-    self._navigation = MooseDocs.yaml_load(navigation)
 
     # Extract the MooseLinkDatabase for creating source and doxygen links
     self._syntax = dict()
@@ -87,8 +83,14 @@ class Builder(object):
         break
 
     content_dir = os.path.join(os.getcwd(), 'content')
-    self._root = MoosePage(path=os.path.join(content_dir, 'index.md'), site_dir=self._site_dir, syntax=self._syntax)
-    make_tree(content_dir, self._root, self._site_dir, self._syntax)
+    kwargs = {'parser': parser,
+              'site_dir': self._site_dir,
+              'syntax': self._syntax,
+              'navigation': MooseDocs.yaml_load(navigation),
+              'template': template,
+              'template_args': template_args}
+    self._root = MoosePage(path=os.path.join(content_dir, 'index.md'), **kwargs)
+    make_tree(content_dir, self._root, **kwargs)
 
     self._pages = [self._root] + list(flat(self._root))
 
@@ -106,13 +108,12 @@ class Builder(object):
 
     if disable_threads:
       for page in self._pages:
-        page.build(self._parser, self._navigation, self._template, self._template_args)
+        page.build()
 
     else:
       jobs = []
       for page in self._pages:
-        func = lambda: page.build(self._parser, self._navigation, self._template, self._template_args)
-        p = multiprocessing.Process(target=func)
+        p = multiprocessing.Process(target=page.build)
         p.start()
         jobs.append(p)
 

@@ -79,27 +79,27 @@ class MoosePage(NavigationNode):
     self.name = output.pop('name', self.name)
     return '\n'.join(lines[count:]), output
 
-  def build(self, parser, navigation, template, template_args):
+  def build(self):
     """
     Converts the markdown to html.
     """
 
     # Parse the HTML
     if self.path.endswith('.md'):
-      self._html = parser.convert(self._content)
+      self._html = self._parser.convert(self._content)
     else:
       self._html = self._content
 
-    template_args = copy.copy(template_args)
+    template_args = copy.copy(self._template_args)
     template_args.update(self._meta)
 
     # Create the template object
     env = jinja2.Environment(loader=jinja2.FileSystemLoader([os.path.join(MooseDocs.MOOSE_DIR, 'docs', 'templates'),
                                                              os.path.join(os.getcwd(), 'templates')]))
-    template = env.get_template(template)
+    template = env.get_template(self._template)
 
     # Render the html via template
-    complete = template.render(current=self, navigation=navigation, **template_args)
+    complete = template.render(current=self, navigation=self._navigation, **template_args)
 
     # Make sure the destination directory exists
     destination = os.path.join(self.site_dir, self.url())

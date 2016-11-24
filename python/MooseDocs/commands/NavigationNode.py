@@ -8,13 +8,18 @@ class NavigationNode(object):
     name[str]: The name of the node.
     parent[NavigationNode]: The parent node in tree.
   """
-  def __init__(self, path='.', parent=None, site_dir=None, syntax=None, name=None):
+  def __init__(self, path='.', parent=None, site_dir=None, syntax=None, name=None,
+               parser=None, navigation=None, template=None, template_args=None):
 
     # Public member variables, these are accessed by the Jinja2 template.
     self.path = path
     self.parent = parent
     self.site_dir = site_dir
     self.syntax = syntax
+    self._parser = parser
+    self._navigation = navigation
+    self._template = template
+    self._template_args = template_args
     self._url = None
 
     if name == None:
@@ -25,7 +30,6 @@ class NavigationNode(object):
       name = ' '.join([n[0].upper() + n[1:] for n in name.split('_')]) # Don't use title() because that will lower case within the string
 
     self.name = name
-
 
     self.children = []
 
