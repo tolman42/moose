@@ -10,12 +10,11 @@ def generate_options(parser, subparser):
   """
 
   generate_parser = subparser.add_parser('generate', help="Check that documentation exists for your application and generate the markdown documentation from MOOSE application executable.")
-  generate_parser.add_argument('--disable-stubs', dest='stubs', action='store_false', help="Disable the creation of system and object stub markdown files.")
   generate_parser.add_argument('--locations', nargs='+', help="List of locations to consider, names should match the keys listed in the configuration file.")
 
   return generate_parser
 
-def generate(config_file='moosedocs.yml', stubs=False, locations=None, **kwargs):
+def generate(config_file='moosedocs.yml', generate=True, locations=None, **kwargs):
   """
   Generates MOOSE system and object markdown files from the source code.
 
@@ -40,6 +39,6 @@ def generate(config_file='moosedocs.yml', stubs=False, locations=None, **kwargs)
   # Populate the syntax
   for key, value in ext_config['locations'].iteritems():
     if (locations == None) or (key in locations):
-      syntax = MooseDocs.MooseApplicationSyntax(yaml, name=key, stubs=stubs, **value)
+      syntax = MooseDocs.MooseApplicationSyntax(yaml, name=key, generate=generate, **value)
       log.info("Checking documentation for '{}'.".format(key))
       syntax.check()

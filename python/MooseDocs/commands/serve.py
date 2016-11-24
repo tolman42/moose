@@ -14,7 +14,7 @@ def serve_options(parser, subparser):
   Command-line options for serve command.
   """
 
-  serve_parser = subparser.add_parser('serve', help='Generate and Sever the documentation using a local server.')
+  serve_parser = subparser.add_parser('serve', help='Serve the documentation using a local server.')
   serve_parser.add_argument('--host', default='127.0.0.1', type=str, help="The local host location for live web server (default: %(default)s).")
   serve_parser.add_argument('--port', default='8000', type=str, help="The local host port for live web server (default: %(default)s).")
 

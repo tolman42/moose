@@ -20,7 +20,7 @@ def build_options(parser, subparser):
   """
   Command-line options for build command.
   """
-  build_parser = subparser.add_parser('build', help='Generate and Build the documentation for serving.')
+  build_parser = subparser.add_parser('build', help='Build the documentation for serving on another system.')
   build_parser.add_argument('--disable-threads', action='store_true', help="Disable threaded building.")
   return build_parser
 

@@ -204,7 +204,7 @@ def command_line_options():
 
   # Add the sub-commands
   test_parser = commands.test_options(parser, subparser)
-  check_parser = subparser.add_parser('check', help="Perform error checking on documentation.")
+  check_parser = commands.check_options(parser, subparser)
   generate_parser = commands.generate_options(parser, subparser)
   serve_parser = commands.serve_options(parser, subparser)
   build_parser = commands.build_options(parser, subparser)
@@ -234,7 +234,7 @@ def moosedocs():
   if cmd == 'test':
     commands.test(**options)
   elif cmd == 'check':
-    commands.generate(stubs=False, **options)
+    commands.check(**options)
   elif cmd == 'generate':
     commands.generate(**options)
   elif cmd == 'serve':
