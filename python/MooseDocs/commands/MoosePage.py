@@ -195,6 +195,7 @@ class MoosePage(NavigationNode):
       if syntax.hasObject(name):
         include = syntax.filenames(name)[0]
         rel_include = MooseDocs.relpath(include)
+
         output.append( ('Header', os.path.join(repo_url, 'blob', 'master', rel_include)) )
 
         source = include.replace('/include/', '/src/').replace('.h', '.C')

@@ -81,18 +81,16 @@ def create_collection(node, syntax, action, groups=[]):
   """
 
   groups = groups if groups else syntax.keys()
-
-  header = True if len(groups) > 1 else False
+  use_header = True if len(groups) > 1 else False
 
   children = []
   for name in groups:
     items = get_collection_items(node, name, syntax[name], action)
-    if items and header:
+    if items and use_header:
       header = etree.Element('div')
       header.set('class', 'collection-header')
       header.text = '{} {}'.format(name.replace('_', ' ').title(), '{}s'.format(action.title()))
       items.insert(0, header)
-
     children += items
 
   collection = None
@@ -100,7 +98,6 @@ def create_collection(node, syntax, action, groups=[]):
     collection = etree.Element('div')
     collection.set('class', 'moose collection with-header')
     collection.extend(children)
-
   return collection
 
 

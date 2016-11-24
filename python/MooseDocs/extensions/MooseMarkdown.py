@@ -91,9 +91,9 @@ class MooseMarkdown(markdown.Extension):
     database = MooseDocs.MooseLinkDatabase(**config)
 
     # Populate the syntax
-    self.syntax = dict()
-    for key, value in config['locations'].iteritems():
-      self.syntax[key] = MooseDocs.MooseApplicationSyntax(exe_yaml, **value)
+    self.syntax = collections.OrderedDict()
+    for item in config['locations']:
+      self.syntax[item.keys()[0]] = MooseDocs.MooseApplicationSyntax(exe_yaml, **item.values()[0])
 
     # Preprocessors
     md.preprocessors.add('moose_bibtex', MooseBibtex(markdown_instance=md, **config), '_end')

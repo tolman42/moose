@@ -91,7 +91,6 @@ class MooseSystemList(MooseSyntaxBase):
 
     add_li(data, el)
 
-
     for tag in list(el):
       has_collection = False
       for div in tag.iter('div'):

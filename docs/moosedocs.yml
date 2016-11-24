@@ -20,9 +20,10 @@ markdown_extensions:
           repo: https://github.com/idaholab/moose/blob/master
           links:
               Tests:
-                  - test
+                  - test/tests
                   - modules/phase_field/tests
                   - modules/tensor_mechanics/tests
+                  - modules/heat_conduction/tests
               Examples:
                   - examples
                   - modules/phase_field/examples
@@ -31,10 +32,11 @@ markdown_extensions:
                   - tutorials
                   - modules/tensor_mechanics/tutorials
               Source:
-                  - modules/heat_conduction/include
+                  - modules/phase_field/include
                   - modules/tensor_mechanics/include
+                  - modules/heat_conduction/include
           locations:
-              framework:
+              - framework:
                   doxygen: http://mooseframework.com/docs/doxygen/moose/
                   paths:
                       - framework/src
@@ -76,8 +78,7 @@ markdown_extensions:
                       - /Variables
                       - /VectorPostprocessors
                       - /UserObjects
-
-              phase_field:
+              - phase_field:
                   doxygen: http://mooseframework.org/docs/doxygen/modules/
                   paths:
                       - modules/phase_field/src
@@ -96,7 +97,7 @@ markdown_extensions:
                       - /UserObjects
                       - /Variables
                       - /VectorPostprocessors
-              tensor_mechanics:
+              - tensor_mechanics:
                   doxygen: http://mooseframework.org/docs/doxygen/modules/
                   paths:
                       - modules/tensor_mechanics/src
@@ -113,7 +114,7 @@ markdown_extensions:
                       - /ScalarKernels
                       - /UserObjects
                       - /VectorPostprocessors
-              heat_conduction:
+              - heat_conduction:
                   hide:
                       - /ThermalContact
                   doxygen: http://mooseframework.org/docs/doxygen/modules/
