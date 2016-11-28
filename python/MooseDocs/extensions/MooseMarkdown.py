@@ -45,7 +45,6 @@ class MooseMarkdown(markdown.Extension):
     self.config['package']      = [False, "Enable the use of the MoosePackageParser."]
     self.config['graphviz']     = ['/opt/moose/graphviz/bin', 'The location of graphviz executable for use with diagrams.']
     self.config['dot_ext']      = ['svg', "The graphviz/dot output file extension (default: svg)."]
-    self.config['hide']         = [[], "A list of input file syntax to hide from system."]
 
     # Construct the extension object
     super(MooseMarkdown, self).__init__(**kwargs)

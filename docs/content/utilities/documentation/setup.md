@@ -11,20 +11,34 @@ process: [Moose Flavored Markdown](moose_flavored_markdown.md).
 ---
 
 ## Dependencies
-If you are using a current MOOSE package then a majority of the setup is complete. Simply install Git LFS (Large File
-storage) as detailed below and you are ready.
+If you are using a current MOOSE package then a majority of the setup is complete, only the large file storage system needs
+to be installed, which can be done by running the following command:
 
-### Git LFS
-Install the latest Git Large File Storage package for your system following the getting started instruction from [git-lfs.github.com/](https://git-lfs.github.com/). If you are working on documentation in MOOSE or an application that has existing documentation then
+```
+git lfs install
+```
+
+If you are working on documentation in MOOSE or an application that has existing documentation then
 you will need to run the following command from within the repository to download any existing images.
 
 ```
 git lfs pull
 ```
 
+
+### Git LFS
+
 ### Manual Setup
 If you are not using a MOOSE package, then the following steps may be performed to install the necessary dependencies
 for using the documentation system.
+
+(1) Install Git LFS
+Install the latest Git Large File Storage package for your system following the getting started instruction from [git-lfs.github.com/](https://git-lfs.github.com/). If you are working on documentation in MOOSE or an application that has existing documentation then
+you will need to run the following command from within the repository to download any existing images.
+
+```
+git lfs pull
+```
 
 (1) Create a new python environment.
 
@@ -46,18 +60,7 @@ source activate docs
 (3) Install the additional python packages.
 
 ```text
-pip install markdown-include python-markdown-math mkdocs-bootstrap mkdocs-bootswatch beautifulsoup4 pybtex
-```
-
-(4) Install development version of [mkdocs](http://www.mkdocs.org/).
-
-Currently, MOOSE requires the development version of [mkdocs](http://www.mkdocs.org/). To install the following must be performed.
-
-```text
-cd ~/projects
-git clone https://github.com/mkdocs/mkdocs.git
-cd mkdocs
-python setup.py install
+pip install markdown markdown-include python-markdown-math bs4 pybtex jinja2 livereload
 ```
 
 ## Configuration
@@ -76,36 +79,33 @@ Second, you need to create a configuration file. Again, it is best to start by c
 cp ~/projects/moose/docs/moosedocs.yml ~/projects/your_application_name/doc
 ```
 
-The "moosedocs.yml" file that was copied will need to be modified for your application.
+The "moosedocs.yml" file that was copied will likely need to be modified for your application. This configuration file as
+well as all other paths within the documentation are always provided
 
-The MOOSE documentation system relies on [mkdocs](http://www.mkdocs.org/), thus a configuration file must exist for it. MOOSE
-uses the "moosedocs.yml" file for this purpose. Therefore, any configuration options for [mkdocs](http:://www.mkdocs.org) is simply added
-to the "mooosedocs.yml" file. For additional information regarding the configuration options available please refer to [MkDocs Configuration](http://www.mkdocs.org/user-guide/configuration/).
+The following configuration options are available.
 
-[MkDocs](http://www.mkdocs.org/) uses the python [markdown](http://pythonhosted.org/Markdown/) package and adds a custom extension to add the
-necessary functionality. This custom extension is located in `python/MooseDocs/extensions/MooseMarkdown.py` and includes
-various configuration options, which are set in the "moosedocs.yml" file. For example, the following settings are utilized in MOOSE.
+| Options | Default | Description |
+| site_dir | "site" | Location that the website content will be copied when running the 'build' command.
+| navigation | navigation.yml | A yaml file containing the sites top navigation menu, which is limited to one nested level.
+| template | materilize.html | Name of the html template file to utilize, it must be located in the 'templates' directory.
+| template_arguments | dict() | A dictionary of template arguments that are passed to the template.
+| markdown_extensions | [] | A list of the markdown extensions to utilize when building the site.
+
+The MOOSE documentation system uses the [python markdown](http://pythonhosted.org/Markdown/) package from which a custom set of markdown
+was created, the available options for this package are listed in the table below as well as the configuration for MOOSE documentation.
 
 !text docs/moosedocs.yml start=markdown_extensions
 
-Notice, that one of the extensions listed is the aforementioned custom package provided by MOOSE. This package contains the following options
-to configure the MOOSE documentation system for your application.
-
 | Option       | Default | Description |
 | ------------ | ------- | ----------- |
-| root         |         | The root directory of the repository, if not provided the root is found using git. |
-| make         |         | The location of the Makefile responsible for building the application, if not provided the directory from "root" option is used. |
 | executable   |         | The MOOSE application to execute to generate syntax. |
 | locations    | dict()  | A list of locations to search for objects and systems that should be documented. |
 | repo         |         | The location for the remote repository for creating hyperlinks. |
 | links        |         | Source code paths for generating code links. This options could contain headings (e.g., Tests), under each heading is a list of  directories that will be searched for input files and source code. |
-| docs_dir     | 'docs'  | The location of the documentation directory. |
-| markdown_dir | 'docs/content' | The location of the markdown to be used for generating the site. |
 | slides       | False   | Enable the parsing for creating reveal.js slides. |
 | package      | False   | Enable the use of the MoosePackageParser. |
 | graphviz     | '/opt/moose/graphviz/bin' | The location of graphviz executable for use with diagrams. |
-| dot_ext      | 'svg'   | The file extension to utilize with graphviz dot exectution. |
-| pages        | 'pages.yml' | The the pages file defining the site map. |
+| dot_ext      | 'svg'   | The file extension to utilize with graphviz dot execution. |
 
 The 'locations' option contains should contain sub-items, as shown above in the MOOSE configuration file. These sub-items
 include:
@@ -115,3 +115,4 @@ include:
 | doxygen  | The path to the doxygen website, used for developer links. |
 | paths    | A list of paths to the source code (i.e., source and include directories).|
 | install  | The location where the markdown is located for this documentation sub-item. |
+| hide     | The MOOSE syntax to ignore. |
