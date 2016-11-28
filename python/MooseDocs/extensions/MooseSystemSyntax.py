@@ -33,15 +33,15 @@ class MooseSystemSyntax(MooseSyntaxBase):
     # Extract match options and settings
     action = match.group(2)
     syntax = match.group(3)
-    settings, styles = self.getSettings(match.group(4))
+    settings = self.getSettings(match.group(4))
 
     if action == 'subobjects':
-      el = self.subobjectsElement(syntax, styles, settings)
+      el = self.subobjectsElement(syntax, settings)
     elif action == 'subsystems':
-      el = self.subsystemsElement(syntax, styles, settings)
+      el = self.subsystemsElement(syntax, settings)
     return el
 
-  def subobjectsElement(self, obj_name, styles, settings):
+  def subobjectsElement(self, obj_name, settings):
     """
     Create table of sub-objects.
     """
@@ -55,13 +55,13 @@ class MooseSystemSyntax(MooseSyntaxBase):
     if not node:
       return self.createErrorElement("The are not any sub-objects for the supplied syntax: {}".format(obj_name))
 
-    el = etree.Element('div', styles)
+    el = self.applyElementSettings(etree.Element('div'), settings)
     h2 = etree.SubElement(el, 'h2')
     h2.text = settings['title'] if settings['title'] else 'Available Sub-Objects'
     el.append(MooseDocs.extensions.create_object_collection(node, self._syntax))
     return el
 
-  def subsystemsElement(self, sys_name, styles, settings):
+  def subsystemsElement(self, sys_name, settings):
     """
     Create table of sub-systems.
     """
@@ -70,7 +70,7 @@ class MooseSystemSyntax(MooseSyntaxBase):
     if not node:
       return createErrorElement("The are not any sub-systems for the supplied syntax: {} You likely need to remove the '!subobjects' syntax.".format(sys_name))
 
-    el = etree.Element('div', styles)
+    el = self.applyElementSettings(etree.Element('div'), settings)
     h2 = etree.SubElement(el, 'h2')
     h2.text = settings['title'] if settings['title'] else 'Available Sub-Systems'
     el.append(MooseDocs.extensions.create_system_collection(node, self._syntax))

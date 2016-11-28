@@ -36,11 +36,11 @@ class MooseSlider(BlockProcessor, MooseCommonExtension):
     BlockProcessor.__init__(self, parser)
 
     # The default settings
-    self._settings = {'caption'  : None,
-                      'interval' : None,
-                      'pause'    : None,
-                      'wrap'     : None,
-                      'keyboard' : None}
+    self._settings['caption'] =  None
+    self._settings['interval'] = None
+    self._settings['pause'] = None
+    self._settings['wrap'] = None
+    self._settings['keyboard'] = None
 
   def parseFilenames(self, filenames_block):
     """
@@ -94,7 +94,7 @@ class MooseSlider(BlockProcessor, MooseCommonExtension):
     block = blocks.pop(0)
     match = self.RE.search(block)
     options = match.group(1)
-    settings, styles = self.getSettings(options)
+    settings = self.getSettings(options)
 
 
     slider = etree.SubElement(parent, 'div')

@@ -172,10 +172,6 @@ the syntax for the system or object being documented.
 
 It is possible to include images and slideshows of images with more flexibility than standard markdown.
 
-!!! note
-    Images paths should be specified relative to the "doc_dir", which by default is the "docs" directory
-    at the top-level of the repository.
-
 ### Single Images
 The markdown keyword for MOOSE images is `!image` followed by the filename as shown below. This command, like most of the other
 special MOOSE markdown commands except arbitrary html attributes. Therefore, any keyword, value pairs (e.g., `width=50%`) are
