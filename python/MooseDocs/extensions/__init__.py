@@ -53,15 +53,15 @@ def get_collection_items(node, group_name, group_syntax, action):
       if has_items:
 
         item = etree.Element('div')
-        item.set('class', 'collection-item')
+        item.set('class', 'collection-item row')
         items.append(item)
 
-        item_header = etree.SubElement(item, 'div')
-        item_header.set('class', 'moose-collection-name')
+        item_header = etree.SubElement(item, 'div' )
+        item_header.set('class', 'moose-collection-name col s12 m12 l4')
 
-        #item_desc = etree.SubElement(item, 'div')
-        #item_desc.set('class', 'moose-subobjects-description')
-        #item_desc.text = child['description']
+        item_desc = etree.SubElement(item, 'div')
+        item_desc.set('class', 'moose-collection-description col s12 m12 l8')
+        item_desc.text = child['description']
 
         a = etree.SubElement(item_header, 'a')
         a.text = short_name

@@ -336,15 +336,21 @@ footer.page-footer {
     padding-bottom:5px;
 }
 
+/*
 .collection-item .moose-collection-name{
     width:30%;
+    float:left;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    font-weight:600;
 }
-
+*/
 .collection-item .moose-collection-description{
-    width:70%;
-    overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    color:#757575;
 }
-
 
 
 /* Slideshows with white backgrounds and captions, need a black drop text shadow */
