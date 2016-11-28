@@ -85,10 +85,7 @@ class MoosePage(NavigationNode):
     """
 
     # Parse the HTML
-    if self.path.endswith('.md'):
-      self._html = self._parser.convert(self._content)
-    else:
-      self._html = self._content
+    self._html = self._parser.convert(self._content)
 
     template_args = copy.copy(self._template_args)
     template_args.update(self._meta)
@@ -175,6 +172,11 @@ class MoosePage(NavigationNode):
 
           if current != tag.parent:
             tag.wrap(current)
+
+    # Fix media links
+    for img in soup('img'):
+      img['src'] = self.relpath(img['src'])
+
 
     return soup
 

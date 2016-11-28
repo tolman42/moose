@@ -11,7 +11,7 @@ In addition to the Sumo and Hughes textbook \cite{simo2006computational}, _Intro
 The stress update materials are not called by MOOSE directly but instead only by other materials using the `computeProperties` method.  For the `RadialReturnStressUpdate` materials, this calling material is [ComputeReturnMappingStress](ComputeReturnMappingStress.md).  Separating the call to the stress update materials from MOOSE allows us to iteratively call the stress update materials as is required to achieve convergence.
 
 ##Radial Return Algorithm Overview
-!image media/tensor_mechanics-RadialReturnStressSpace.png width=350 float=right caption=Figure 1: A trial stress is shown outside of the deviatoric yield surface and the radial return stress which is normal to the yield surface.
+!image docs/media/tensor_mechanics-RadialReturnStressSpace.png width=350 float=right caption=Figure 1: A trial stress is shown outside of the deviatoric yield surface and the radial return stress which is normal to the yield surface.
 
 {!docs/content/documentation/modules/tensor_mechanics/common/supplementalRadialReturnStressUpdate.md!}
 

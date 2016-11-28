@@ -8,7 +8,7 @@ The `ErrorFractionMarker` utilizes the value from an
 element. Using this error approximation the following algorithm is
 applied:
 
-!image media/error_fraction_marker_example.png float=right width=auto margin=20px padding=20px caption=ErrorFractionMarker example calculation.
+!image docs/media/error_fraction_marker_example.png float=right width=auto margin=20px padding=20px caption=ErrorFractionMarker example calculation.
 
 1. The elements are sorted by increasing error.
 2. The elements comprising the "refine" fraction, from highest error to lowest, of the total error are marked for refinement.

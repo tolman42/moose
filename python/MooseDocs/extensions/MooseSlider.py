@@ -75,7 +75,7 @@ class MooseSlider(BlockProcessor, MooseCommonExtension):
         # an error state
         return []
       for f in new_files:
-        files.append({"path": os.path.relpath(f, self._docs_dir), "caption": caption})
+        files.append({"path": os.path.relpath(f, os.getcwd()), "caption": caption})
     return files
 
   def test(self, parent, block):
