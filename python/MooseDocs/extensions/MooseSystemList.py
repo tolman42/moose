@@ -10,38 +10,40 @@ import MooseDocs
 
 class MooseSystemList(MooseSyntaxBase):
   """
-  Creates tables of sub-object/systems.
+  Creates dynamic lists of sub-object/systems.
 
+  Examples:
   !systems
+  !systems framework phase_field
   """
 
   RE = r'^!systems\s*(.*)'
 
   def __init__(self, yaml=None, syntax=None, **kwargs):
     MooseSyntaxBase.__init__(self, self.RE, yaml=yaml, syntax=syntax, **kwargs)
-    self._settings['title'] = None
-
+    self._settings['groups'] = None
 
   def handleMatch(self, match):
     """
-    Handle the regex match.
+    Handle the regex match for this extension.
     """
 
-    groups = self._syntax.keys()
+    # Extract settings
+    settings = self.getSettings(match.group(2))
 
-    match.group(2)
-    if match.group(2):
-      groups = match.group(2).split()
+    # Extract the data to consider
+    groups = self._syntax.keys()
+    if settings['groups']:
+      groups = settings['groups'].split()
     data = self._yaml.get()
 
-
+    # The primary element
     el = etree.Element('div')
     el.set('class', 'moose-system-list')
-
-
-
     def add_li(items, parent, level=0):
-
+      """
+      Helper for building nested lists of objects.
+      """
       for item in items:
 
         name = item['name']
@@ -56,17 +58,10 @@ class MooseSystemList(MooseSyntaxBase):
         if level == 0:
           div.set('class', 'section scrollspy')
           div.set('id', id)
-       # else:
-       #   div.set('class', 'moose-system-list-item')
-
-#        header = etree.SubElement(div, 'p')
-
 
         h = etree.SubElement(div, 'h{}'.format(str(level+2)))
         h.text = short_name
         h.set('id', id)
-
-
 
         a = etree.SubElement(h, 'a')
         a.set('href', MooseDocs.extensions.system_name(item))
@@ -87,18 +82,15 @@ class MooseSystemList(MooseSyntaxBase):
           else:
             add_li(item['subblocks'], etree.SubElement(div, 'div'), level+1)
 
-
-
     add_li(data, el)
 
+    # Remove headings that don't contain objects
     for tag in list(el):
       has_collection = False
-      for div in tag.iter('div'):
-        if ('class' in div.attrib) and (div.attrib['class'] == 'moose collection with-header'):
+      for item in tag.iter('ul'):
+        if ('class' in item.attrib):
           has_collection = True
       if not has_collection:
         el.remove(tag)
-
-
 
     return el

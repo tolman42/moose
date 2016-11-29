@@ -1,1 +1,1 @@
-!systems phase_field
+!systems groups=phase_field

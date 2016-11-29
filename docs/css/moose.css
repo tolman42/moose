@@ -305,53 +305,32 @@ footer.page-footer {
 }
 
 
-.moose-system-list .h2, .h3, .h4, .h5, .h6{
-    padding:10px;
-    margin-bottom:10px;
+.moose-system-list .moose-group-header{
     color: white;
     background-color: #005897;
     font-size: larger;
 }
 
-
 .moose-system-list .material-icons{
     margin-left:15px;
 }
 
-.moose-system-list .moose.collection.with-header{
-    margin-left:15px;
-}
-
-.moose.collection.with-header .collection-header{
-    border:0;
-    margin:0;
-    margin-top: 0;
-    margin-bottom: 0;
-    color: white;
-    background-color: #005897;
-}
-
-.collection.with-header .collection-item{
-    padding-top:5px;
-    padding-bottom:5px;
-}
-
-/*
-.collection-item .moose-collection-name{
-    width:30%;
-    float:left;
+.moose-system-list .collapsible-header .moose-collection-name{
+    white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
-    font-weight:600;
 }
-*/
-.collection-item .moose-collection-description{
+
+.moose-system-list .collapsible-header .moose-collection-description{
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
     color:#757575;
 }
 
+.moose-system-list .collapsible-header .row{
+    margin-bottom: 0;
+}
 
 /* Slideshows with white backgrounds and captions, need a black drop text shadow */
 .carousel-caption {
