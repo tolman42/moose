@@ -27,3 +27,6 @@ MathJax.Hub.Config({
   jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
   extensions: ["MathMenu.js", "MathZoom.js"]
 });
+
+// Copy code button
+var clipboard = new Clipboard('.moose-copy-button');

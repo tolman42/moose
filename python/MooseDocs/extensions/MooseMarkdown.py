@@ -21,6 +21,7 @@ from MooseSlidePreprocessor import MooseSlidePreprocessor
 from MooseBuildStatus import MooseBuildStatus
 from MooseBibtex import MooseBibtex
 from MooseSystemList import MooseSystemList
+from CodeCopy import CodeCopy
 import MooseDocs
 import utils
 

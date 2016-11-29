@@ -85,12 +85,12 @@ class MooseSystemList(MooseSyntaxBase):
     add_li(data, el)
 
     # Remove headings that don't contain objects
-    for tag in list(el):
-      has_collection = False
-      for item in tag.iter('ul'):
-        if ('class' in item.attrib):
-          has_collection = True
-      if not has_collection:
-        el.remove(tag)
+    #for tag in list(el):
+    #  has_collection = False
+    #  for item in tag.iter('ul'):
+    #    if ('class' in item.attrib):
+    #      has_collection = True
+    #  if not has_collection:
+    #    el.remove(tag)
 
     return el

@@ -111,6 +111,8 @@ class MoosePage(NavigationNode):
       log.debug('Creating {}'.format(destination))
       fid.write(soup.encode('utf-8'))
 
+    if 'moose_flavored_markdown' in destination:
+      import sys;sys.exit()
 
   def finalize(self, soup):
     """
@@ -139,7 +141,7 @@ class MoosePage(NavigationNode):
         # Error if file not found or if multiple files found
         if not found:
           log.error('Failed to locate page for markdown file {} in {}'.format(href, self.path))
-          link.attrs.pop('href')
+          #link.attrs.pop('href')
           link['class'] = 'moose-bad-link'
           continue
 
@@ -155,10 +157,23 @@ class MoosePage(NavigationNode):
         link['href'] = url
 
     # Fix <pre><code class="python"> to be <pre class="language-python"><code>
+    # Add code copy button
+    count = 0
     for pre in soup('pre'):
       code = pre.find('code')
-      if code and 'class' in code.attrs:
-        pre['class'] = 'language-{}'.format(code['class'])
+      if code and code.has_attr('class'):
+        pre['class'] = 'language-{}'.format(code['class'][0])
+
+        if not code.has_attr('id'):
+          code['id'] = 'moose-code-block-{}'.format(str(count))
+          count += 1
+
+        id = '#{}'.format(code['id'])
+        btn = soup.new_tag('button')
+        btn['class'] = "moose-copy-button btn"
+        btn['data-clipboard-target'] = id
+        btn.string = 'copy'
+        pre.insert(0, btn)
 
     # Add materialize sections for table-of-contents
     div = soup.find('div', id='moose-markdown-content')
