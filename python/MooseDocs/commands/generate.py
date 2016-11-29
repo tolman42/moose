@@ -37,8 +37,9 @@ def generate(config_file='moosedocs.yml', generate=True, locations=None, **kwarg
     yaml = utils.MooseYaml(raw)
 
   # Populate the syntax
-  for key, value in ext_config['locations'].iteritems():
-    if (locations == None) or (key in locations):
-      syntax = MooseDocs.MooseApplicationSyntax(yaml, name=key, generate=generate, **value)
-      log.info("Checking documentation for '{}'.".format(key))
-      syntax.check()
+  for loc in ext_config['locations']:
+    for key, value in loc.iteritems():
+      if (locations == None) or (key in locations):
+        syntax = MooseDocs.MooseApplicationSyntax(yaml, name=key, generate=generate, **value)
+        log.info("Checking documentation for '{}'.".format(key))
+        syntax.check()

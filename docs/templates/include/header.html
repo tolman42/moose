@@ -14,20 +14,6 @@ Page header including the "sidebar" navigation.
   {% endfor %}
 {% endfor %}
 
-
-<!--ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">three</a></li>
-  <li>
-    <ul class="dropdown-content">
-      <li>Foo</li>
-      <li>Bar</li>
-    </ul>
-  </li>
-</ul-->
-
 <nav>
   <div class="nav-wrapper container">
     <a href="{{current.relpath('index.html')}}" class="page-title">MOOSE</a>
@@ -53,9 +39,9 @@ Page header including the "sidebar" navigation.
       <li>
         <a class="github-mark-label" href="{{repo_url}}">
           {% if 'gitlab' in repo_url %}
-            <img class="github-mark" src={{current.relpath('media/gitlab-logo.png')}}>GitLab
+            <img class="github-mark" src={{current.relpath('docs/media/gitlab-logo.png')}}>GitLab
           {% else %}
-            <img class="github-mark" src={{current.relpath('media/github-mark-light.png')}}>GitHub
+            <img class="github-mark" src={{current.relpath('docs/media/github-mark-light.png')}}>GitHub
           {% endif %}
         </a>
       </li>

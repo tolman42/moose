@@ -8,8 +8,8 @@ log = logging.getLogger(__name__)
 from markdown.inlinepatterns import Pattern
 from markdown.util import etree
 from MooseSyntaxBase import MooseSyntaxBase
+from MooseObjectParameterTable import MooseObjectParameterTable
 import utils
-import MooseDocs
 
 class MooseObjectSyntax(MooseSyntaxBase):
   """
@@ -102,8 +102,8 @@ class MooseObjectSyntax(MooseSyntaxBase):
 
     # Create the tables (generate 'Required' and 'Optional' initially so that they come out in the proper order)
     tables = collections.OrderedDict()
-    tables['Required'] = MooseDocs.MooseObjectParameterTable(display_type = settings['display'])
-    tables['Optional'] = MooseDocs.MooseObjectParameterTable(display_type = settings['display'])
+    tables['Required'] = MooseObjectParameterTable(display_type = settings['display'])
+    tables['Optional'] = MooseObjectParameterTable(display_type = settings['display'])
 
     # Loop through the parameters in yaml object
     for param in node['parameters'] or []:
@@ -114,7 +114,7 @@ class MooseObjectSyntax(MooseSyntaxBase):
         name = 'Optional'
 
       if name not in tables:
-        tables[name] = MooseDocs.MooseObjectParameterTable(display_type = settings['display'])
+        tables[name] = MooseObjectParameterTable(display_type = settings['display'])
       tables[name].addParam(param)
 
     el = self.applyElementSettings(etree.Element('div'), settings)

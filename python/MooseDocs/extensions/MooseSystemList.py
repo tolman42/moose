@@ -81,8 +81,6 @@ class MooseSystemList(MooseSyntaxBase):
           tag = etree.SubElement(h, 'div')
           tag.set('class', 'chip moose-chip')
           tag.text = gname.replace('_', ' ').title()
-        else:
-          print name
 
         if name.endswith('<type>'):
           collection = MooseDocs.extensions.create_object_collection(item, self._syntax, groups=groups)
