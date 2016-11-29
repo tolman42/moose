@@ -15,7 +15,6 @@ if utils.check_configuration(['yaml', 'jinja2', 'markdown', 'markdown_include', 
 
 import yaml
 from MarkdownTable import MarkdownTable
-from MooseObjectParameterTable import MooseObjectParameterTable
 from MooseApplicationSyntax import MooseApplicationSyntax
 from MooseLinkDatabase import MooseLinkDatabase
 
