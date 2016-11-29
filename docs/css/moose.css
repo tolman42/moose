@@ -83,6 +83,12 @@ li{
     padding-left:15px;
 }
 
+.moose-chip{
+    margin-left: 10px;
+    bottom: 8px;
+    position: relative;
+}
+
 #logo-container {
     height: 57px;
     margin-bottom: 32px;

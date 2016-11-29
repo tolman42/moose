@@ -28,6 +28,13 @@ class MooseSystemList(MooseSyntaxBase):
     Handle the regex match for this extension.
     """
 
+    def group_name(groups, name):
+      for group in groups:
+        if self._syntax[group].hasSystem(name):
+          return group
+      return None
+
+
     # Extract settings
     settings = self.getSettings(match.group(2))
 
@@ -69,6 +76,14 @@ class MooseSystemList(MooseSyntaxBase):
         i.set('class', 'material-icons')
         i.text = 'input'
 
+        gname = group_name(groups, name)
+        if gname:
+          tag = etree.SubElement(h, 'div')
+          tag.set('class', 'chip moose-chip')
+          tag.text = gname.replace('_', ' ').title()
+        else:
+          print name
+
         if name.endswith('<type>'):
           collection = MooseDocs.extensions.create_object_collection(item, self._syntax, groups=groups)
           if collection:
@@ -85,12 +100,13 @@ class MooseSystemList(MooseSyntaxBase):
     add_li(data, el)
 
     # Remove headings that don't contain objects
-    #for tag in list(el):
-    #  has_collection = False
-    #  for item in tag.iter('ul'):
-    #    if ('class' in item.attrib):
-    #      has_collection = True
-    #  if not has_collection:
-    #    el.remove(tag)
-
+    """
+    for tag in list(el):
+      has_collection = False
+      for item in tag.iter('ul'):
+        if ('class' in item.attrib):
+          has_collection = True
+      if not has_collection:
+        el.remove(tag)
+    """
     return el
