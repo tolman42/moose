@@ -94,16 +94,14 @@ li{
 }
 
 .collapsible-header .moose-parameter-name{
-    width:20%;
-    float:left;
+    white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
     font-weight:600;
 }
 
 .collapsible-header .moose-parameter-header-default{
-    width:10%;
-    float:left;
+    white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
     color:#757575;
@@ -112,8 +110,6 @@ li{
 
 .collapsible-header .moose-parameter-header-description{
     white-space:nowrap;
-    float:right;
-    width:70%;
     overflow:hidden;
     text-overflow:ellipsis;
     color:#757575;
@@ -129,11 +125,6 @@ li{
 .collapsible li.active .moose-parameter-header-default{
     display:none;
 }
-
-.collapsible li.active .moose-parameter-name{
-    width:100%;
-}
-
 
 nav,
 .btn,

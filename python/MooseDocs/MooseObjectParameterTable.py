@@ -37,35 +37,39 @@ class MooseObjectParameterTable(object):
       header = etree.SubElement(li, 'div')
       header.set('class', "collapsible-header")
 
-      div = etree.SubElement(header, 'div')
-      div.set('class', 'moose-parameter-name')
-      div.text = param['name']
+      header_row = etree.SubElement(header, 'div')
+      header_row.set('class', 'row')
+
+      header_name = etree.SubElement(header_row, 'div')
+      header_name.set('class', 'moose-parameter-name col l4')
+      header_name.text = param['name']
 
       default = self._formatParam(param, 'default').strip()
       if default:
-        div = etree.SubElement(header, 'div')
-        div.set('class', 'moose-parameter-header-default')
-        div.text = default#'(Default: {})'.format(default)
+        default_span = etree.SubElement(header_name, 'span')
+        default_span.set('class', 'moose-parameter-header-default')
+        default_span.text = ' ({})'.format(default)
 
-      description = param['description']
-      div = etree.SubElement(header, 'div')
-      div.set('class', 'moose-parameter-header-description')
-      div.text = description
-
+      description = param['description'].strip()
+      if description:
+        div = etree.SubElement(header_row, 'div')
+        div.set('class', 'moose-parameter-header-description col l8 hide-on-med-and-down')
+        div.text = description
 
       body = etree.SubElement(li, 'div')
       body.set('class', "collapsible-body")
 
-      div = etree.SubElement(body, 'div')
-      div.set('class', 'moose-parameter-description')
-      div.text = description
+      if description:
+        div = etree.SubElement(body, 'div')
+        div.set('class', 'moose-parameter-description')
+        div.text = description
 
       div = etree.SubElement(body, 'div')
       div.set('class', 'moose-parameter-default')
       if default:
         div.text = 'Default: {}'.format(default)
       else:
-        div.text = 'Default: None'
+          div.text = 'Default: None'
 
       div = etree.SubElement(body, 'div')
       div.set('class', 'moose-parameter-type')
