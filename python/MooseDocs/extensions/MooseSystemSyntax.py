@@ -58,7 +58,9 @@ class MooseSystemSyntax(MooseSyntaxBase):
     el = self.applyElementSettings(etree.Element('div'), settings)
     h2 = etree.SubElement(el, 'h2')
     h2.text = settings['title'] if settings['title'] else 'Available Sub-Objects'
-    el.append(MooseDocs.extensions.create_object_collection(node, self._syntax))
+    collection = MooseDocs.extensions.create_object_collection(node, self._syntax)
+    if collection:
+      el.append(collection)
     return el
 
   def subsystemsElement(self, sys_name, settings):
@@ -73,6 +75,8 @@ class MooseSystemSyntax(MooseSyntaxBase):
     el = self.applyElementSettings(etree.Element('div'), settings)
     h2 = etree.SubElement(el, 'h2')
     h2.text = settings['title'] if settings['title'] else 'Available Sub-Systems'
-    el.append(MooseDocs.extensions.create_system_collection(node, self._syntax))
+    collection = MooseDocs.extensions.create_system_collection(node, self._syntax)
+    if collection:
+      el.append(collection)
 
     return el

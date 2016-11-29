@@ -2,7 +2,7 @@
 
 * [Mac OS](installation/mac_os.md)
 * [Ubuntu](installation/ubuntu.md)
-* [Mint](installation/mind.md)
+* [Mint](installation/mint.md)
 * [OpenSUSE](installation/opensuse.md)
 * [Fedora](installation/fedora.md)
 * [CentOS](installation/centos.md)

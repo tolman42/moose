@@ -1,13 +1,13 @@
 # Markers System
 
-The marker system is a sub-system of the [Adaptivity system](/Adaptivity/Overview.md)
+The marker system is a sub-system of the [Adaptivity system](/Adaptivity/index.md)
 in MOOSE. The `Marker` objects serve to set the refinement flag to one of
 four states as defined by the C++ Enum `MarkerValue`. MOOSE
 will call the `computeElementMarker` method,
 which returns a `MarkerValue`. This value is then applied to an
-elemental [AuxVariable](AuxVariables/Overview.md). The automatic mesh
+elemental [AuxVariable](AuxVariables/index.md). The automatic mesh
 refinement engine will then use this field to refine and coarsen the
-mesh in a consistent manner, as detailed in the [Adaptivity system](/Adaptivity/Overview.md).
+mesh in a consistent manner, as detailed in the [Adaptivity system](/Adaptivity/index.md).
 
 ## Marker Values
 The four possible `MarkerValue` states are defined in `Marker.h` as

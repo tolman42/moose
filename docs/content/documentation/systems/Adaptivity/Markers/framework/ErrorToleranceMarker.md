@@ -5,7 +5,7 @@
 ## Description
 The `ErrorTolerenceMarker` requires an approximation of
 the error to be supplied via an
-[Indicator](/Indicators/Overview.md). Using the measure of error an
+[Indicator](/Indicators/index.md). Using the measure of error an
 element is define for coarsening or refinement using a hard tolerances:
 
 * Refine if the element error is greater than value supplied in "refine" input parameter.

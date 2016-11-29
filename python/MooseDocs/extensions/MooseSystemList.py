@@ -34,6 +34,8 @@ class MooseSystemList(MooseSyntaxBase):
           return group
       return None
 
+    def hidden(groups, name):
+      return all([obj.hidden(name) for obj in self._syntax.itervalues()])
 
     # Extract settings
     settings = self.getSettings(match.group(2))
@@ -56,7 +58,7 @@ class MooseSystemList(MooseSyntaxBase):
         name = item['name']
         short_name = name.split('/')[-1].strip()
 
-        if short_name == '<type>':
+        if short_name == '<type>' or hidden(groups, name):
           continue
 
         id = short_name.replace(' ', '-').lower()

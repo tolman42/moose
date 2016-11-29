@@ -10,7 +10,7 @@ This kernel solves the steady state stress divergence equation in polar coordina
 
 {!docs/content/documentation/modules/tensor_mechanics/common/supplementalStressDivergenceKernels.md!}
 
-For a detailed explanation of the settings for `use_displaced_mesh` in mechanics problems, see the [Introduction/StressDivergence](/introduction/StressDivergence.md) page.
+For a detailed explanation of the settings for `use_displaced_mesh` in mechanics problems, see the [StressDivergence](/tensor_mechanics/StressDivergence.md) page.
 
  The stress divergence in spherical coordinates includes contributions from the normal polar and azimuthal stresses even in the 1D case.  After simplifying for the 1D case, the spherical stress divergence reduces to
 $$

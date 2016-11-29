@@ -4,7 +4,7 @@
 
 ## Description
 The `ErrorFractionMarker` utilizes the value from an
-[Indicator](/Indicators/Overview.md) as a measure of "error" on each
+[Indicator](/Indicators/index.md) as a measure of "error" on each
 element. Using this error approximation the following algorithm is
 applied:
 

@@ -4,7 +4,7 @@
 
 ## Description
 The `ValueRangeMarker` utilizes an
-[Indicator](/Indicators/Overview.md) as en estimate of error. Elements
+[Indicator](/Indicators/index.md) as en estimate of error. Elements
 with error estimates inside and outside of an allowable range can then
 be marked for coarsening or refinement.
 

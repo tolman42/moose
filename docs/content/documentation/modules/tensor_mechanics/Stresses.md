@@ -41,15 +41,15 @@ $$
 $$.
 The two simplified elastic stress materials in Tensor Mechanics are
 
-1. [ComputeLinearElasticStress](/Materials/ComputeLinearElasticStress.md) for small total strain formulations, and
+1. [ComputeLinearElasticStress](/ComputeLinearElasticStress.md) for small total strain formulations, and
 
-2. [ComputeFiniteStrainElasticStress](/Materials/ComputeFiniteStrainElasticStress.md) for incremental and finite strain formulations.
+2. [ComputeFiniteStrainElasticStress](/ComputeFiniteStrainElasticStress.md) for incremental and finite strain formulations.
 
 ## Plasticity with User Objects
 This approach to modeling plasticity problems uses as stress material to call several `UserObjects`, where each user object calculates and returns a specific materials property, e.g. a crystal plasticity lip system strength.  The stress material then calculates the current stress state based on the returned material properties.
 
 ### MultiSurface Plasticity
-In MOOSE, multi-surface plasticity is implemented through the [ComputeMultiPlasticityStress](/Materials/ComputeMultiPlasticityStress.md) Material. This assumes that there is exactly one internal parameter per single-surface plasticity model, and that the functions for single-surface plasticity model depend only on its internal parameter: there must not be 2 or more internal parameters per single-surface plasticity model.)  In this case
+In MOOSE, multi-surface plasticity is implemented through the [ComputeMultiPlasticityStress](/ComputeMultiPlasticityStress.md) Material. This assumes that there is exactly one internal parameter per single-surface plasticity model, and that the functions for single-surface plasticity model depend only on its internal parameter: there must not be 2 or more internal parameters per single-surface plasticity model.)  In this case
 $$
 \begin{array}{rcll}
 f_{\alpha} & = & f_{\alpha}(\sigma, q_{\alpha}) & \text{yield functions} \\
@@ -70,12 +70,12 @@ The Newton-Raphson procedure attempts to solve three types of equation:
 In addition to these constraints, the Kuhn-Tucker and consistency conditions must also be satisfied.  If the above constraints are satisfied, then these last conditions amount to: if $f_{\alpha}=0$ (up to a tolerance), then $\gamma^{\alpha}\geq 0$; otherwise $\gamma^{\alpha}=0$.
 
 ### Crystal Plasticity
-The `UserObject` based crystal plasticity system is designed to facilitate the implementation of different constitutive laws in a modular way. Both **phenomenological** constitutive models and **dislocation-based** constitutive models can be implemented through this system. This system consists of one material class [FiniteStrainUObasedCP](/Materials/FiniteStrainUObasedCP.md) and four userobject classes:
+The `UserObject` based crystal plasticity system is designed to facilitate the implementation of different constitutive laws in a modular way. Both **phenomenological** constitutive models and **dislocation-based** constitutive models can be implemented through this system. This system consists of one material class [FiniteStrainUObasedCP](/FiniteStrainUObasedCP.md) and four userobject classes:
 
-* [CrystalPlasticitySlipRate](/UserObjects/CrystalPlasticitySlipRateGSS.md)
-* [CrystalPlasticitySlipResistance](/UserObjects/CrystalPlasticitySlipResistanceGSS.md)
-* [CrystalPlasticityStateVarRateComponent](/UserObjects/CrystalPlasticityStateVarRateComponentGSS.md)
-* [CrystalPlasticityStateVariable](/UserObjects/CrystalPlasticityStateVariable.md)
+* [CrystalPlasticitySlipRate](/CrystalPlasticitySlipRateGSS.md)
+* [CrystalPlasticitySlipResistance](/CrystalPlasticitySlipResistanceGSS.md)
+* [CrystalPlasticityStateVarRateComponent](/CrystalPlasticityStateVarRateComponentGSS.md)
+* [CrystalPlasticityStateVariable](/CrystalPlasticityStateVariable.md)
 
 ### Hyperelastic Viscoplastic
 The Hyperelastic Viscoplastic model is based on the multiplicative decomposition of the total deformation ($\underline{F}$) gradient into an elastic ($\underline{F}^e$) and viscoplastic ($\underline{F}^{vp}$) component. The viscoplastic component of deformation is evolved in the intermediate configuration following
@@ -87,7 +87,7 @@ $$
 where $\dot{\lambda^i}$ and $\underline{r}^i$ are the flow rate and flow directions, respectively, and, $N$ is the number of flow rates. This representation allows different flow rates and directions to be superimposed to obtain an effective viscoplastic deformation of the material.
 
 
-The integration of the model is performed using a combination of Material and DiscreteElementUserObject classes.  In the material class, [FiniteStrainHyperElasticViscoPlastic](/Materials/FiniteStrainHyperElasticViscoPlastic.md) the following residual equations are set for every flow rate. The flow rates and directions are also calculated using UserObjects. The material class declares properties associated with each of the UserObjects and calls the functions in the UserObjects to perform the update as described above. The available base classes of UserObjects are as follows:
+The integration of the model is performed using a combination of Material and DiscreteElementUserObject classes.  In the material class, [FiniteStrainHyperElasticViscoPlastic](/FiniteStrainHyperElasticViscoPlastic.md) the following residual equations are set for every flow rate. The flow rates and directions are also calculated using UserObjects. The material class declares properties associated with each of the UserObjects and calls the functions in the UserObjects to perform the update as described above. The available base classes of UserObjects are as follows:
 
 * `HEVPFlowRateUOBase`
 * `HEVPInternalVarRateUOBase`
@@ -96,7 +96,7 @@ The integration of the model is performed using a combination of Material and Di
 
 
 ##Creep and Plasticity with StressUpdate Materials
-In addition to the User Object based plasticity models, another set of plasticity and creep material models have been developed with the `StressUpdateBase` class, which allows for iterations within the material itself.  These iterative materials are designated by `StressUpdate` at the end of the class name. These classes use a Radial Return von Mises, or J2, approach to determine the inelastic, creep, damage, or plasticity strain increments at each time step.  The advantage of the stress update materials is the ability to combine multiple inelastic stress calculations, such as creep and plasticity. The [Stress Update Radial Return Mapping Algorithm](/Materials/RadialReturnStressUpdate.md) discusses the general algorithm to return the stress state to the yield surface.
+In addition to the User Object based plasticity models, another set of plasticity and creep material models have been developed with the `StressUpdateBase` class, which allows for iterations within the material itself.  These iterative materials are designated by `StressUpdate` at the end of the class name. These classes use a Radial Return von Mises, or J2, approach to determine the inelastic, creep, damage, or plasticity strain increments at each time step.  The advantage of the stress update materials is the ability to combine multiple inelastic stress calculations, such as creep and plasticity. The [Stress Update Radial Return Mapping Algorithm](/RadialReturnStressUpdate.md) discusses the general algorithm to return the stress state to the yield surface.
 
 The stress update materials are not called by MOOSE directly but instead only by other materials using the `computeProperties` method. Separating the call to the stress update materials from MOOSE allows us to iteratively call the update materials as is required to achieve convergence.
 
@@ -104,7 +104,7 @@ For **isotropic materials** the radial return approach offers distinct advantage
 
   - **Faster simulation run times**: The isotropic material iteration algorithm uses single variable `Reals` to compute and converge the inelastic strain instead of inverting the full `Rank-4` elasticity tensor required in more complicated anisotropic algorithms.
   - **Easy to understand**: The return mapping algorithm implemented in [RadialReturnStressUpdate](Materials/RadialReturnStressUpdate.md) is the classical radial return method based on the von Mises yield criterion.
-  - **Applicable to a variety of models**: The radial return method provides the flexibility to include creep, plasticity, and damage within a single simulation.  The [ComputeReturnMappingStress](/Materials/ComputeReturnMappingStress.md) class calls each individual creep and plasticity model to iterate separately over the inelastic strain increment before checking for the convergence of the combined total radial return stress increment required to return the stress state to the yield surface.
+  - **Applicable to a variety of models**: The radial return method provides the flexibility to include creep, plasticity, and damage within a single simulation.  The [ComputeReturnMappingStress](/ComputeReturnMappingStress.md) class calls each individual creep and plasticity model to iterate separately over the inelastic strain increment before checking for the convergence of the combined total radial return stress increment required to return the stress state to the yield surface.
 
 
 The stress update materials each individually calculate, using the [Newton Method](http://mathworld.wolfram.com/NewtonsMethod.html), the amount of effective inelastic strain required to return the stress state to the yield surface.
@@ -115,6 +115,6 @@ where the change in the iterative effective inelastic strain is defined as the y
 $$
  d \Delta p = \frac{\sigma^{trial}_{effective} - 3 G \Delta p - r - \sigma_{yield}}{3G + h}
 $$
-where G is the isotropic shear modulus, and $\sigma^{trial}_{effective}$ is the scalar von Mises trial stress.  
+where G is the isotropic shear modulus, and $\sigma^{trial}_{effective}$ is the scalar von Mises trial stress.
 
 When more than one stress update material is included in the simulation `ComputeReturnMappingStress` will iterate over the change in the calculated stress until the return stress has reached a stable value.

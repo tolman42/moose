@@ -14,7 +14,7 @@ $\eta$ is the variable the kernel is acting on and $f$ is a free energy density
 provided by the [function material](../../introduction/FunctionMaterials) specified in `f_name`.
 
 Note that this makes the assumption that $F$ is _not_ depending on $\nabla c$. The $\nabla c$ dependent terms
-that arise from the gradient interface energy are handled separately in the [`CHInterface`](/Kernels/CHInterface.md) kernel.
+that arise from the gradient interface energy are handled separately in the [`CHInterface`](/CHInterface.md) kernel.
 
 !parameters /Kernels/CahnHilliard
 

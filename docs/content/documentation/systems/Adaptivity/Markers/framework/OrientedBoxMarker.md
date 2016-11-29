@@ -4,7 +4,7 @@
 
 ## Description
 The `OrientedBoxMarker` operates the in a similar
-fashion as the [BoxMarker](Markers/BoxMarker.md); however, the box is
+fashion as the [BoxMarker](/BoxMarker.md); however, the box is
 defined given a center, width, length, and height. The box is then
 oriented by defining direction vectors for the width and length
 dimensions.

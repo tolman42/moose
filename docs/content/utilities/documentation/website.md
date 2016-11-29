@@ -1,6 +1,6 @@
 # Creating a Web-site
 
-The primary motivation behind the [MOOSE documentation system](documentation/overview.md) was to create a customizable, maintainable web-site for the MOOSE framework and modules. However, it was important to the the MOOSE developers that this system be available to application developers as well
+The primary motivation behind the [MOOSE documentation system](utilities/documentation/index.md) was to create a customizable, maintainable web-site for the MOOSE framework and modules. However, it was important to the the MOOSE developers that this system be available to application developers as well
 to enable for MOOSE-based applications to be well-documented using a common syntax.
 
 The first step for creating a web-site is to document your code, which is detailed here: [Documenting Code](documentation/code.md). Once this is complete then you should continue with the steps listed on this page that include creating [content](#creating-web-site-content), [page layout](#web-site-layout), [viewing](#viewing-your-web-site), and [deploying](#web-site-deployment) the site.

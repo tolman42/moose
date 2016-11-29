@@ -8,8 +8,8 @@
     contribute an off-diagonal Jacobian at all.
 
 # See also
-* [[/Kernels/HeatCapacityConductionTimeDerivative.md]]
-* [[/Kernels/SpecificHeatConductionTimeDerivative.md]]
+* [[/HeatCapacityConductionTimeDerivative.md]]
+* [[/SpecificHeatConductionTimeDerivative.md]]
 
 !parameters /Kernels/HeatConductionTimeDerivative
 

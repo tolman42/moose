@@ -56,7 +56,7 @@ def get_collection_items(node, group_name, group_syntax, action):
   for child in node['subblocks']:
 
     name = child['name']
-    if name.endswith('*'):
+    if name.endswith('*') or group_syntax.hidden(name):
       continue
     short_name = name.split('/')[-1].strip()
 
