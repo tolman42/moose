@@ -43,7 +43,7 @@ markdown_extensions:
                       - framework/include
                   install: docs/content/documentation/systems
                   hide:
-                      - /Bounds # deprecated syntax that we do not want to document
+                      - /Bounds/ # deprecated syntax that we do not want to document
                       - /Adaptivity/Indicators
                       - /AuxKernels
                       - /AuxScalarKernels
@@ -85,7 +85,7 @@ markdown_extensions:
                       - modules/phase_field/include
                   install: docs/content/documentation/systems
                   hide:
-                      - /Bounds # deprecated
+                      - /Bounds/ # deprecated
                       - /AuxKernels
                       - /AuxVariables
                       - /BCs
@@ -104,7 +104,7 @@ markdown_extensions:
                       - modules/tensor_mechanics/include
                   install: docs/content/documentation/systems
                   hide:
-                      - /Bounds # deprecated
+                      - /Bounds/ # deprecated
                       - /AuxKernels
                       - /BCs
                       - /Kernels
@@ -123,7 +123,7 @@ markdown_extensions:
                       - ../modules/heat_conduction/include
                   install: content/modules/heat_conduction/systems
                   hide:
-                      - /Bounds # deprecated
+                      - /Bounds/ # deprecated
                       - /BCs
                       - /Constraints
                       - /DiracKernels
