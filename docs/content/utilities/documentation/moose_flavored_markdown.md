@@ -210,16 +210,18 @@ line.
 
 A full slideshow example might be:
 ```markdown
-!slideshow caption=My caption with spaces interval=5000 pause=null wrap=false keyboard=false width=500px
-    media/memory_logger-plot_multi.png caption=Memory Logger plotting two results
-    media/memory_logger-darkmode.png caption=Memory Logger utilizing darkmode
-    media/memory_*.png
+!slideshow
+    media/memory_logger-darkmode.png caption= Output of memory logging tool position=relative left=350px top=-150px
+    media/testImage_tallNarrow.png background-color=#F8F8FF caption= This is a tall, thin image color=red font-size=300% width=100% height=100%
+    media/github*.png background-color=gray
+    media/memory_logger-plot_multi.png
 ```
 
-!slideshow caption=My caption with spaces interval=5000 pause=null wrap=false keyboard=false width=500px
-    media/memory_logger-plot_multi.png caption=Memory Logger plotting two results
-    media/memory_logger-darkmode.png caption=Memory Logger utilizing darkmode
-    media/memory_*.png
+!slideshow max-width=50% left=220px
+    media/memory_logger-darkmode.png caption= Output of memory logging tool position=relative left=150px top=-150px
+    media/testImage_tallNarrow.png background-color=#F8F8FF caption= This is a tall, thin image color=red font-size=200% width=200px height=100%
+    media/github*.png background-color=gray
+    media/memory_logger-plot_multi.png
 
 ---
 

@@ -24,7 +24,6 @@ from MooseBibtex import MooseBibtex
 import MooseDocs
 import utils
 
-
 class MooseMarkdown(markdown.Extension):
   """
   Extensions that comprise the MOOSE flavored markdown.
