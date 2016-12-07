@@ -25,7 +25,7 @@ class MooseSlider(BlockProcessor, MooseCommonExtension):
   It is assumed image names will have the same filepath as on the webserver.
   """
 
-  RE = re.compile(r'^!\ ?slideshow(.*)')
+  RE = re.compile(r'^!\ ?slider(.*)')
   # If there are multiple carousels on the same page then
   # they need to have different ids
   MATCHES_FOUND = 0

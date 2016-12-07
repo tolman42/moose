@@ -107,7 +107,7 @@ class MooseMarkdown(markdown.Extension):
 
     # Block processors
     md.parser.blockprocessors.add('diagrams', MooseDiagram(md.parser, **config), '_begin')
-    md.parser.blockprocessors.add('slideshow', MooseSlider(md.parser, **config), '_begin')
+    md.parser.blockprocessors.add('slider', MooseSlider(md.parser, **config), '_begin')
     md.parser.blockprocessors.add('css', MooseCSS(md.parser, **config), '_begin')
 
     # Inline Patterns
