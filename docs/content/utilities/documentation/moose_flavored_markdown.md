@@ -184,7 +184,8 @@ automatically applied to the `<figure>` tag of the image. For example, the follo
 ```
 
 ### Slideshows
-A sequence of images can be shown via a `carousel`. By default the images will auto cycle between images.
+A sequence of images can be shown via a `slider`.
+By default the images will auto cycle between images.
 
 A simple example:
 
@@ -197,7 +198,7 @@ A simple example:
 This would create a slideshow with the first image as `intro.png` and the next images those that are matched by the wildcard `other*.png`.
 
 Valid options for the slidehow are standard CSS options (see example below).  Changing
-the invterval between slides, transition time, and button layout are not available
+the invterval between slides, transition time, and button layout is not possible 
 at this time.
 
 CSS options for background images can be applied to individual images as keyword

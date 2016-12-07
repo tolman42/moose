@@ -18,32 +18,20 @@ class MooseSlider(BlockProcessor, MooseCommonExtension):
      images/more*.png
 
   Where <options> are key=value pairs.
-  See http://getbootstrap.com/javascript/#carousel for allowed carousel options.
-  Additionally, "caption" can also be used on the slideshow line to
-  set a default caption.
+  Valid options are standard CSS options (images are set as background images).
 
   It is assumed image names will have the same filepath as on the webserver.
   """
 
   RE = re.compile(r'^!\ ?slider(.*)')
-  # If there are multiple carousels on the same page then
-  # they need to have different ids
-  MATCHES_FOUND = 0
 
   def __init__(self, parser, **kwargs):
     MooseCommonExtension.__init__(self, **kwargs)
     BlockProcessor.__init__(self, parser)
 
-    # The default settings
-    #self._settings = {'caption'  : None,
-#                      'interval' : None,
-#                      'pause'    : None,
-#                      'wrap'     : None,
-#                      'keyboard' : None}
-
   def parseFilenames(self, filenames_block):
     """
-    Parse a set of lines with filenames, image options, and optional caption.
+    Parse a set of lines with filenames, image options, and optional captions.
     Filenames can contain wildcards and glob will be used to expand them.
     Any CSS styles after the filename (but before caption if it exists)
     will be applied to the image (image is set as a background in slider).
@@ -71,6 +59,7 @@ class MooseSlider(BlockProcessor, MooseCommonExtension):
       matches = regular_expression.search(line)
       fname = matches.group(1).strip()
 
+      #get separate dictionaries for the image and caption
       img_dict = dict()
       caption_dict = dict()
       dict_array = [img_dict,caption_dict]
