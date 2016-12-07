@@ -211,14 +211,24 @@ appears after "caption" will be applied to the caption.
 
 A full slideshow example might be:
 ```markdown
+<<<<<<< HEAD
 !slider max-width=50% left=220px
     media/memory_logger-darkmode.png caption= Output of memory logging tool position=relative left=150px top=-150px
     media/testImage_tallNarrow.png background-color=#F8F8FF caption= This is a tall, thin image color=red font-size=200% width=200px height=100%
+=======
+!slideshow
+    media/memory_logger-darkmode.png caption= Output of memory logging tool position=relative left=350px top=-150px
+    media/testImage_tallNarrow.png background-color=#F8F8FF caption= This is a tall, thin image color=red font-size=300% width=100% height=100%
+>>>>>>> d73fd11337183f68563f6c0775e746ce55847599
     media/github*.png background-color=gray
     media/memory_logger-plot_multi.png
 ```
 
+<<<<<<< HEAD
 !slider max-width=50% left=220px
+=======
+!slideshow max-width=50% left=220px
+>>>>>>> d73fd11337183f68563f6c0775e746ce55847599
     media/memory_logger-darkmode.png caption= Output of memory logging tool position=relative left=150px top=-150px
     media/testImage_tallNarrow.png background-color=#F8F8FF caption= This is a tall, thin image color=red font-size=200% width=200px height=100%
     media/github*.png background-color=gray
