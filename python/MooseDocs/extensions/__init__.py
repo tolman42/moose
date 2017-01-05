@@ -22,6 +22,7 @@ def full_name(node, action, group_name='.'):
     full_name.insert(-1, group_name)
     full_name[-1] += '.md'
   elif action == 'system':
+    full_name.insert(0, 'systems')
     full_name.append('index.md')
 
   return '/'.join(full_name)
@@ -118,7 +119,7 @@ def create_collection(node, syntax, action, groups=[]):
       li = etree.Element('li')
       header = etree.SubElement(li, 'div')
       header.set('class', 'collapsible-header moose-group-header')
-      header.text = '{} {}'.format(name.replace('_', ' ').title(), '{}s'.format(action.title()))
+      header.text = '{} {}'.format(syntax[name].name(), '{}s'.format(action.title()))
       items.insert(0, header)
     children += items
 

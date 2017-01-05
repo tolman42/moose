@@ -31,7 +31,7 @@ class MooseSystemList(MooseSyntaxBase):
     def group_name(groups, name):
       for group in groups:
         if self._syntax[group].hasSystem(name):
-          return group
+          return self._syntax[group].name()
       return None
 
     def hidden(groups, name):
@@ -82,7 +82,7 @@ class MooseSystemList(MooseSyntaxBase):
         if gname:
           tag = etree.SubElement(h, 'div')
           tag.set('class', 'chip moose-chip')
-          tag.text = gname.replace('_', ' ').title()
+          tag.text = gname
 
         if name.endswith('<type>'):
           collection = MooseDocs.extensions.create_object_collection(item, self._syntax, groups=groups)
@@ -100,7 +100,7 @@ class MooseSystemList(MooseSyntaxBase):
     add_li(data, el)
 
     # Remove headings that don't contain objects
-    """
+    # TODO: This hides actions that are not supposed to have objects, but for now we just hide
     for tag in list(el):
       has_collection = False
       for item in tag.iter('ul'):
@@ -108,5 +108,4 @@ class MooseSystemList(MooseSyntaxBase):
           has_collection = True
       if not has_collection:
         el.remove(tag)
-    """
     return el

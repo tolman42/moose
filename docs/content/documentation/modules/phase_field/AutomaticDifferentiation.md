@@ -53,7 +53,7 @@ Almost all FParser opcodes are supported, _except_ `PCall` and `FCall`, which ar
 
 The automatic differentiation will currently complain when taking derivatives of functions that are not differentiable in a countable infinite number of points (such as `int()`), it will however take derivatives of functions like the absolute value `abs()` that are not differentiable in only a single point. This limitation is arbitrary and may be changed in future versions.
 
-The current version of the AD module _does_ support differentiationg FParser objects that have been previously optimized.
+The current version of the AD module _does_ support differentiating FParser objects that have been previously optimized.
 
 ## Example
 
@@ -86,7 +86,7 @@ Not that optimizing the FParser object using `.Optimize()` after taking the deri
 
 The convenience of parsed and automatically differentiated functions does come with a performance penalty. Despite optimizations the parsed functions are slower than hand coded and compiled functions.
 
-JIT (Just In Time) compilation is available for parsed functions. The JIT system is utilized by adding the `enable_jit = true` (default) option in the [`DerivativeParsedMaterial`](framework/DerivativeParsedMaterial.md) block. MOOSE will then attempt to compile the functions and its derivatives into machine code and use it for the residual and Jacobian calculations. This almost fully recovers the performance of hand coded free energies while retaining the flexibility of automatic differentiation.
+JIT (Just In Time) compilation is available for parsed functions. The JIT system is utilized by adding the `enable_jit = true` (default) option in the [`DerivativeParsedMaterial`](/DerivativeParsedMaterial.md) block. MOOSE will then attempt to compile the functions and its derivatives into machine code and use it for the residual and Jacobian calculations. This almost fully recovers the performance of hand coded free energies while retaining the flexibility of automatic differentiation.
 
 ## See also
 

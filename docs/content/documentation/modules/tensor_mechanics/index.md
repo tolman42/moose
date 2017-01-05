@@ -110,19 +110,11 @@ The mechanical strain is passed to the `Compute*Stress` methods to calculate the
 
 Thermal strains are a volumetric change resulting from a change in temperature of the material.  The change in strains can be either a simple linear function of thermal change, e.g. ($\boldsymbol{\epsilon}_T = \alpha \Delta T$) or a more complex function of temperature.   Besides thermal expansion, some models employ other stress-free strains ($\boldsymbol{\epsilon}_0$) to provide inherit strains in the material.
 
-<<<<<<< ee946c45a8e34c794bbf2a700b36130c9a55d65a
-The thermal expansion class, [ComputeThermalExpansionEigenstrain](/Materials/ComputeThermalExpansionEigenstrain.md) computes the thermal strains for both small total strains and for incremental strains as a linear function of temperature.  The input file syntax is
+The thermal expansion class, [ComputeThermalExpansionEigenstrain](/ComputeThermalExpansionEigenStrain.md) computes the thermal strains for both small total strains and for incremental strains as a linear function of temperature.  The input file syntax is
 
 !input modules/tensor_mechanics/tests/thermal_expansion/constant_expansion_coeff.i block=thermal_expansion_strain overflow-y=scroll max-height=300px
 
-Other eigenstrains could be caused by defects such as over-sized or under-sized second phase particles. Another stress-free strain material that has been implemented is [ComputeVariableEigenstrain](/Materials/ComputeVariableEigenstrain.md). This class computes a lattice mismatch due to a secondary phase, where the form of the tensor is defined by an input vector, and the scalar dependence on a phase variable is defined in another material. The input file syntax is
-=======
-The thermal expansion class, [ComputeThermalExpansionEigenStrain](/ComputeThermalExpansionEigenStrain.md) inherits from `ComputeStressFreeStrainBase` to compute the thermal strains for both small total strains and for incremental strains as a linear function of temperature.  The input file syntax is
-
-!input modules/tensor_mechanics/tests/thermal_expansion/constant_expansion_coeff.i block=thermal_expansion_strain overflow-y=scroll max-height=300px
-
-Other stress-free strains / eigenstrains could be caused by defects such as over-sized or under-sized second phase particles. Another stress-free strain material that has been implemented is [ComputeVariableEigenstrain](/ComputeVariableEigenstrain.md). This class computes a lattice mismatch due to a secondary phase, where the form of the tensor is defined by an input vector, and the scalar dependence on a phase variable is defined in another material. The input file syntax is
->>>>>>> Fixing links
+Other eigenstrains could be caused by defects such as over-sized or under-sized second phase particles. Another stress-free strain material that has been implemented is [ComputeVariableEigenstrain](/ComputeVariableEigenstrain.md). This class computes a lattice mismatch due to a secondary phase, where the form of the tensor is defined by an input vector, and the scalar dependence on a phase variable is defined in another material. The input file syntax is
 
 !input modules/combined/tests/eigenstrain/inclusion.i block=var_dependence overflow-y=scroll max-height=400px
 

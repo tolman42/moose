@@ -178,7 +178,7 @@ $$
 \end{eqnarray}
 $$
 
-The second and third derivatives would be required to use the direct solution method (via [`CahnHilliard`](/CahnHilliard.md)) and the first and second derivatives would be required to use the split solution method (via [`SplitCHParsed`](/SplitCHParsed.md)). This model has been implemented in the [`MathFreeEnergy`](/Materials/MathFreeEnergy.md) material found in the phase field module of MOOSE, inheriting from `DerivativeFunctionMaterialBase`. The code from [`MathFreeEnergy`](/Materials/MathFreeEnergy.md) is shown below:
+The second and third derivatives would be required to use the direct solution method (via [`CahnHilliard`](/CahnHilliard.md)) and the first and second derivatives would be required to use the split solution method (via [`SplitCHParsed`](/SplitCHParsed.md)). This model has been implemented in the [`MathFreeEnergy`](/phase_field/MathFreeEnergy.md) material found in the phase field module of MOOSE, inheriting from `DerivativeFunctionMaterialBase`. The code from [`MathFreeEnergy`](/phase_field/MathFreeEnergy.md) is shown below:
 
 ```cpp
 Real

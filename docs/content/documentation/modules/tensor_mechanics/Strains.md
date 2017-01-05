@@ -21,7 +21,7 @@ The input file syntax for small strain is
 end=stress overflow-y=scroll max-height=300px
 
 ##Incremental Small Strains
-Applicable for small linearized strains, MOOSE includes an incremental small strain material, [ComputeIncrementalSmallStrain](/omputeIncrementalSmallStrain.md).  As in the small strain material, the incremental small strain class assumes the gradient of displacement with respect to position is much smaller than unity, and the squared displacement gradient term is neglected in the small strain definition to give:
+Applicable for small linearized strains, MOOSE includes an incremental small strain material, [ComputeIncrementalSmallStrain](/ComputeIncrementalSmallStrain.md).  As in the small strain material, the incremental small strain class assumes the gradient of displacement with respect to position is much smaller than unity, and the squared displacement gradient term is neglected in the small strain definition to give:
 
 $$
 \epsilon = \frac{1}{2} \left( u \nabla + \nabla u \right) \quad when \quad \frac{\partial u}{ \partial x} << 1

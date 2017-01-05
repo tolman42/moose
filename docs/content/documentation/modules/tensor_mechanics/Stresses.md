@@ -103,7 +103,7 @@ The stress update materials are not called by MOOSE directly but instead only by
 For **isotropic materials** the radial return approach offers distinct advantages:
 
   - **Faster simulation run times**: The isotropic material iteration algorithm uses single variable `Reals` to compute and converge the inelastic strain instead of inverting the full `Rank-4` elasticity tensor required in more complicated anisotropic algorithms.
-  - **Easy to understand**: The return mapping algorithm implemented in [RadialReturnStressUpdate](Materials/RadialReturnStressUpdate.md) is the classical radial return method based on the von Mises yield criterion.
+  - **Easy to understand**: The return mapping algorithm implemented in [RadialReturnStressUpdate](/RadialReturnStressUpdate.md) is the classical radial return method based on the von Mises yield criterion.
   - **Applicable to a variety of models**: The radial return method provides the flexibility to include creep, plasticity, and damage within a single simulation.  The [ComputeReturnMappingStress](/ComputeReturnMappingStress.md) class calls each individual creep and plasticity model to iterate separately over the inelastic strain increment before checking for the convergence of the combined total radial return stress increment required to return the stress state to the yield surface.
 
 

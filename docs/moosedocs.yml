@@ -97,6 +97,7 @@ markdown_extensions:
                       - /UserObjects
                       - /Variables
                       - /VectorPostprocessors
+                      - /InterfaceKernels
               - tensor_mechanics:
                   doxygen: http://mooseframework.org/docs/doxygen/modules/
                   paths:
@@ -132,6 +133,7 @@ markdown_extensions:
                       - /UserObjects
                       - /ThermalContact
               - rdg:
+                  name: rDG
                   doxygen: http://mooseframework.org/docs/doxygen/modules/
                   paths:
                       - modules/rdg/src

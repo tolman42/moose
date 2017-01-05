@@ -32,7 +32,7 @@ class MooseApplicationSyntax(object):
   def __init__(self, yaml_data, paths=[], doxygen=None, doxygen_name_style='upper', name=None, install=None, generate=False, hide=[]):
 
     # Public member for syntax object name (i.e., the location name in the configuration file)
-    self.name = name
+    self._name = name
 
     self._yaml_data = yaml_data
     self._hide = hide
@@ -67,6 +67,11 @@ class MooseApplicationSyntax(object):
           name = node['name'].rsplit('/', 1)[0]
           self._systems.add(name)
 
+  def name(self):
+    """
+    Return the name of the syntax.
+    """
+    return self._name
 
   def doxygen(self, name):
     """

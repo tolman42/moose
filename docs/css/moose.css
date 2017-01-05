@@ -311,7 +311,7 @@ footer.page-footer {
 }
 
 
-.moose-system-list .moose-group-header{
+.moose-group-header{
     color: white;
     background-color: #005897;
     font-size: larger;
@@ -321,13 +321,13 @@ footer.page-footer {
     margin-left:15px;
 }
 
-.moose-system-list .collapsible-header .moose-collection-name{
+.collapsible-header .moose-collection-name{
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
 }
 
-.moose-system-list .collapsible-header .moose-collection-description{
+.collapsible-header .moose-collection-description{
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;

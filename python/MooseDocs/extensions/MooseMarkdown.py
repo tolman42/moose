@@ -92,7 +92,10 @@ class MooseMarkdown(markdown.Extension):
     # Populate the syntax
     self.syntax = collections.OrderedDict()
     for item in config['locations']:
-      self.syntax[item.keys()[0]] = MooseDocs.MooseApplicationSyntax(exe_yaml, **item.values()[0])
+      key = item.keys()[0]
+      options = item.values()[0]
+      options.setdefault('name', key.replace('_', ' ').title())
+      self.syntax[key] = MooseDocs.MooseApplicationSyntax(exe_yaml, **options)
 
     # Preprocessors
     md.preprocessors.add('moose_bibtex', MooseBibtex(markdown_instance=md, **config), '_end')

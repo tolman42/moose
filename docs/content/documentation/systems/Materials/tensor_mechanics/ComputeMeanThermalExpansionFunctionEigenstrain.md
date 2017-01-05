@@ -27,4 +27,4 @@ where $T$ is the current temperature and $\boldsymbol{I}$ is the identity matrix
 
 ## References
 \bibliographystyle{unsrt}
-\bibliography{bib/tensor_mechanics.bib}
+\bibliography{docs/bib/tensor_mechanics.bib}
