@@ -52,8 +52,6 @@ p {
 .moose-copy-button{
     position:relative;
     float:right;
-    right:-14px;
-    top:-14px;
 }
 
 moose-caption {
@@ -107,7 +105,7 @@ li{
     padding-left: 30px;
     padding-top: 5px;
     padding-bottom: 15px;
-    padding-right: 5px;
+    padding-right: 30px;
 }
 
 .collapsible-header .moose-parameter-name{

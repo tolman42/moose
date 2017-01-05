@@ -44,9 +44,7 @@ class MoosePage(NavigationNode):
     if self.path.endswith('.md'):
       content, self._meta = self.meta(content)
 
-
     self._content = content
-
 
 
   def meta(self, content):
@@ -173,7 +171,7 @@ class MoosePage(NavigationNode):
         btn['class'] = "moose-copy-button btn"
         btn['data-clipboard-target'] = id
         btn.string = 'copy'
-        pre.insert(0, btn)
+        pre.parent.insert(0, btn)
 
     # Add materialize sections for table-of-contents
     div = soup.find('div', id='moose-markdown-content')

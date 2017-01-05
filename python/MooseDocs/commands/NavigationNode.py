@@ -1,4 +1,5 @@
 import os
+import MooseDocs
 
 class NavigationNode(object):
   """
@@ -77,7 +78,8 @@ class NavigationNode(object):
     if input.startswith('http'):
       return input
 
-    return os.path.relpath(os.path.join(self.site_dir, input), os.path.join(self.site_dir, os.path.dirname(self.url())))
+    local = os.path.relpath(MooseDocs.abspath(input), os.getcwd())
+    return os.path.relpath(os.path.join(self.site_dir, local), os.path.join(self.site_dir, os.path.dirname(self.url())))
 
 
   def build(self, *args, **kwargs):
