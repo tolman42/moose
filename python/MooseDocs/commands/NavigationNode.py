@@ -78,9 +78,14 @@ class NavigationNode(object):
     if input.startswith('http'):
       return input
 
-    local = os.path.relpath(MooseDocs.abspath(input), os.getcwd())
-    return os.path.relpath(os.path.join(self.site_dir, local), os.path.join(self.site_dir, os.path.dirname(self.url())))
+    return os.path.relpath(os.path.join(self.site_dir, input), os.path.join(self.site_dir, os.path.dirname(self.url())))
 
+  def mediapath(self, input):
+    """
+    Returns relative path for 'media' files.
+    """
+    local = os.path.relpath(input, os.path.join(os.getcwd(), 'docs'))
+    return local
 
   def build(self, *args, **kwargs):
     """

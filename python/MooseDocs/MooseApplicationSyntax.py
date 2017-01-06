@@ -83,13 +83,11 @@ class MooseApplicationSyntax(object):
     else:
       return os.path.join(self._doxygen, "class{}.html".format(name))
 
-
   def systems(self):
     """
     Return a set of MOOSE systems defined in the supplied directories.
     """
     return self._systems
-
 
   def hasSystem(self, name):
     """
@@ -97,20 +95,17 @@ class MooseApplicationSyntax(object):
     """
     return name in self._systems
 
-
   def objects(self):
     """
     Returns a set of MOOSE objects defined in the supplied directories.
     """
     return self._objects
 
-
   def hasObject(self, name):
     """
     Returns True when the supplied name is an object stored in the syntax object.
     """
     return name in self._objects
-
 
   def filenames(self, name):
     """
@@ -125,7 +120,6 @@ class MooseApplicationSyntax(object):
 
     return self._filenames[self._objects[name]]
 
-
   def check(self):
     """
     Check that the application documentation exists, create stubs if it does not.
@@ -133,13 +127,11 @@ class MooseApplicationSyntax(object):
     for node in self._yaml_data.get():
       self._checkNode(node)
 
-
   def hidden(self, name):
     """
     Return True if the syntax is hidden.
     """
     return any([h in name for h in self._hide])
-
 
   def _checkNode(self, node):
     """
@@ -164,7 +156,6 @@ class MooseApplicationSyntax(object):
       for child in node['subblocks']:
         self._checkNode(child)
 
-
   def _checkSystem(self, node, full_name):
     """
     Check the status of the documentation for a system.
@@ -184,7 +175,6 @@ class MooseApplicationSyntax(object):
       self._markdown.append(filename)
       self._checkStub(full_name, filename)
 
-
   def _checkObject(self, node, full_name, object_name):
     """
     Check the status of the documentation for a object.
@@ -201,7 +191,7 @@ class MooseApplicationSyntax(object):
 
     # Error if the filename does not exist and create a stub if desired
     filename = os.path.join(self._install, full_name.strip('/').replace('<type>', '') + '.md')
-    filename = os.path.join(os.path.dirname(filename), self.name, os.path.basename(filename))
+    filename = os.path.join(os.path.dirname(filename), self.name(), os.path.basename(filename))
     if not os.path.exists(filename):
       log.error("No documentation for {}. Documentation for this object should be created in: {}".format(full_name, os.path.abspath(filename)))
       if self._generate:
@@ -212,7 +202,6 @@ class MooseApplicationSyntax(object):
       self._markdown.append(filename)
       self._checkStub(full_name, filename)
 
-
   def _checkStub(self, full_name, filename):
     """
     Logs an error if a stub file exists, but content was not added.
@@ -221,7 +210,6 @@ class MooseApplicationSyntax(object):
       lines = fid.readlines()
     if self._stub_header in lines[0]:
       log.error("A MOOSE generated stub page for {} exists, but no content was added. Add documentation content to {}.".format(full_name, filename))
-
 
   def _generateSystem(self, node, full_name, filename):
     """
@@ -254,7 +242,6 @@ class MooseApplicationSyntax(object):
       log.info('Creating stub page for MOOSE system {}: {}'.format(full_name, filename))
       fid.write(stub)
 
-
   def _generateObject(self, node, full_name, object_name, filename):
     """
     Creates a stub MooseObject page.
@@ -274,7 +261,6 @@ class MooseApplicationSyntax(object):
     with open(filename, 'w') as fid:
       log.info('Creating stub page for MOOSE object {}: {}'.format(full_name, filename))
       fid.write(stub)
-
 
   def _updateSyntax(self, path):
     """

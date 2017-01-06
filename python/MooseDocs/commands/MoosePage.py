@@ -37,7 +37,6 @@ class MoosePage(NavigationNode):
       local = os.path.dirname(local)
     self._url = os.path.join(local, 'index.html')
 
-
     with open(self.path, 'r') as fid:
       content = fid.read().decode('utf-8')
 
@@ -109,9 +108,6 @@ class MoosePage(NavigationNode):
       log.debug('Creating {}'.format(destination))
       fid.write(soup.encode('utf-8'))
 
-    if 'moose_flavored_markdown' in destination:
-      import sys;sys.exit()
-
   def finalize(self, soup):
     """
     Finalize the html:
@@ -171,7 +167,11 @@ class MoosePage(NavigationNode):
         btn['class'] = "moose-copy-button btn"
         btn['data-clipboard-target'] = id
         btn.string = 'copy'
-        pre.parent.insert(0, btn)
+
+        if "moose-code-div" in pre.parent['class']:
+            pre.parent.insert(0, btn)
+        else:
+            pre.insert(0, btn)
 
     # Add materialize sections for table-of-contents
     div = soup.find('div', id='moose-markdown-content')
@@ -190,9 +190,7 @@ class MoosePage(NavigationNode):
     for img in soup('img'):
       img['src'] = self.relpath(img['src'])
 
-
     return soup
-
 
   def links(self, repo_url):
     """
